@@ -1,0 +1,852 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="浮点数,IEEE 754," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="zhjx922 De Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="大家在日常开发中，必然使用过浮点数，也会发现浮点数不是精确的，那究竟是什么原因造成的呢？
+
+奇怪的结果12var_dump((1-0.9) == 0.1);//输出:bool(false)
+很奇怪吧！1-0.9怎么能不等于0.1呢？这是为什么呢？这要从浮点数的储存标准开始说。
+IEEE 754浮点数在计算机中是根据IEEE 754(二进制浮点数算数标准)储存的。计算公式为: (-1)^S x M">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正确认识浮点数">
+<meta property="og:url" content="https://zhaojingxian.cn/2017/02/15/正确认识浮点数/index.html">
+<meta property="og:site_name" content="zhjx922 De Blog">
+<meta property="og:description" content="大家在日常开发中，必然使用过浮点数，也会发现浮点数不是精确的，那究竟是什么原因造成的呢？
+
+奇怪的结果12var_dump((1-0.9) == 0.1);//输出:bool(false)
+很奇怪吧！1-0.9怎么能不等于0.1呢？这是为什么呢？这要从浮点数的储存标准开始说。
+IEEE 754浮点数在计算机中是根据IEEE 754(二进制浮点数算数标准)储存的。计算公式为: (-1)^S x M">
+<meta property="og:image" content="https://zhaojingxian.cn/2017/02/15/正确认识浮点数/exp.jpg">
+<meta property="og:updated_time" content="2017-02-15T17:38:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="正确认识浮点数">
+<meta name="twitter:description" content="大家在日常开发中，必然使用过浮点数，也会发现浮点数不是精确的，那究竟是什么原因造成的呢？
+
+奇怪的结果12var_dump((1-0.9) == 0.1);//输出:bool(false)
+很奇怪吧！1-0.9怎么能不等于0.1呢？这是为什么呢？这要从浮点数的储存标准开始说。
+IEEE 754浮点数在计算机中是根据IEEE 754(二进制浮点数算数标准)储存的。计算公式为: (-1)^S x M">
+<meta name="twitter:image" content="https://zhaojingxian.cn/2017/02/15/正确认识浮点数/exp.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://zhaojingxian.cn/2017/02/15/正确认识浮点数/"/>
+
+
+
+
+
+  <title> 正确认识浮点数 | zhjx922 De Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">zhjx922 De Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description">学习、成长、记录</h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://zhaojingxian.cn/2017/02/15/正确认识浮点数/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="zhjx922">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/3774194?v=3&s=460">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="zhjx922 De Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="zhjx922 De Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                正确认识浮点数
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-15T00:26:04+08:00">
+                2017-02-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机原理/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机原理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/15/正确认识浮点数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/15/正确认识浮点数/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>大家在日常开发中，必然使用过浮点数，也会发现浮点数不是精确的，那究竟是什么原因造成的呢？</p>
+</blockquote>
+<h3 id="奇怪的结果"><a href="#奇怪的结果" class="headerlink" title="奇怪的结果"></a>奇怪的结果</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var_dump((<span class="number">1</span><span class="number">-0.9</span>) == <span class="number">0.1</span>);</div><div class="line"><span class="comment">//输出:bool(false)</span></div></pre></td></tr></table></figure>
+<p>很奇怪吧！1-0.9怎么能不等于0.1呢？这是为什么呢？这要从浮点数的储存标准开始说。</p>
+<h3 id="IEEE-754"><a href="#IEEE-754" class="headerlink" title="IEEE 754"></a>IEEE 754</h3><p>浮点数在计算机中是根据<code>IEEE 754</code>(二进制浮点数算数标准)储存的。<br>计算公式为: (-1)^S x M x 2^E</p>
+<p>32位单精度储存结构(对应占位)</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">符号(S)</th>
+<th style="text-align:center">阶码(E)</th>
+<th style="text-align:center">尾数(M)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">23</td>
+</tr>
+</tbody>
+</table>
+<p>64位双精度储存结构(对应占位)</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">符号(S)</th>
+<th style="text-align:center">阶码(E)</th>
+<th style="text-align:center">尾数(M)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">11</td>
+<td style="text-align:center">52</td>
+</tr>
+</tbody>
+</table>
+<p>解释:</p>
+<ul>
+<li>S: 符号(0正，1负)</li>
+<li>E: 阶码(指数)</li>
+<li>M: 尾数(二进制小数,数字的实体部分)</li>
+</ul>
+<p>M(尾数)和E(阶码)不同情况需要分别对待</p>
+<h3 id="E-阶码-的三种状态及对应的M表示"><a href="#E-阶码-的三种状态及对应的M表示" class="headerlink" title="E(阶码)的三种状态及对应的M表示"></a>E(阶码)的三种状态及对应的M表示</h3><p><img src="/2017/02/15/正确认识浮点数/exp.jpg" alt="exp"></p>
+<p>从图中(截图于深入理解计算机系统)我们可以分为三种情况(第三种又分为两种特殊情况)</p>
+<h4 id="规格化"><a href="#规格化" class="headerlink" title="规格化"></a>规格化</h4><p>E既不等于0也不等于255(将S按十进制计算)，这个时候的<code>E=E-127</code>，M的二进制小数默认省略了<code>1.</code>，也就是<code>M=1.M(二进制小数)</code><br>我们做一个简单的测试看一下二进制<code>00111110001000000000000000000000</code>(32位)表示的对应的浮点数为多少？</p>
+<ul>
+<li>首先拆分二进制: <code>0</code> <code>01111100</code> <code>01000000000000000000000</code></li>
+<li>E = 124 = 124 - 127 = -3</li>
+<li>M = 1.01000000000000000000000</li>
+<li>套公式: 1 x 1.01000000000000000000000 x 2^-3 = 0.00101000000000000000000000 = 2^-3 + 2^-5 = 0.15625</li>
+</ul>
+<p>使用PHP验证一下结果：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var_dump(unpack(<span class="string">'f'</span>, pack(<span class="string">'l'</span>, bindec(<span class="string">'00111110001000000000000000000000'</span>)))[<span class="number">1</span>]);</div><div class="line"><span class="comment">//输出: float(0.15625)</span></div></pre></td></tr></table></figure>
+<p>上面的例子没有丢失精度，下面看一个丢失精度的例子：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">printf(<span class="string">'%032s'</span>, decbin(unpack(<span class="string">'l'</span>, pack(<span class="string">'f'</span>, <span class="number">1</span>/<span class="number">3</span>))[<span class="number">1</span>]));</div><div class="line"><span class="comment">//输出: 00111110101010101010101010101011</span></div><div class="line"></div><div class="line">var_dump(unpack(<span class="string">'f'</span>, pack(<span class="string">'l'</span>, bindec(<span class="string">'00111110101010101010101010101011'</span>)))[<span class="number">1</span>]);</div><div class="line">float(<span class="number">0.33333334326744</span>)</div></pre></td></tr></table></figure>
+<p>丢失精度最主要原因就在于M(二进制小数)，我们只能精确的表示2^n倍数的数(2^-1(0.5),2^-2(0.25),2^-3(0.125)…)，丢了在所难免。</p>
+<h4 id="非规格化"><a href="#非规格化" class="headerlink" title="非规格化"></a>非规格化</h4><p>E等于0，这个时候<code>E=-126</code>，M的二进制小数前缀为<code>0.</code>，也就是<code>M=0.M(二进制小数)</code>，具体过程就不写了，和上面类似</p>
+<h4 id="特殊情况"><a href="#特殊情况" class="headerlink" title="特殊情况"></a>特殊情况</h4><p>E等于255(全部位都为1)，如果M全部为0，那么表示为无穷大，否则表示为NaN(不是一个数)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var_dump(unpack(<span class="string">'f'</span>, pack(<span class="string">'l'</span>, bindec(<span class="string">'01111111100000000000000000000000'</span>)))[<span class="number">1</span>]);</div><div class="line"><span class="comment">//输出: float(INF)</span></div><div class="line"></div><div class="line">var_dump(unpack(<span class="string">'f'</span>, pack(<span class="string">'l'</span>, bindec(<span class="string">'01111111100000000000000000000110'</span>)))[<span class="number">1</span>]);</div><div class="line"><span class="comment">//输出: float(NAN)</span></div></pre></td></tr></table></figure>
+<h3 id="不要比较浮点数"><a href="#不要比较浮点数" class="headerlink" title="不要比较浮点数"></a>不要比较浮点数</h3><p>总之，浮点数是不准确的。尤其在我们日常工作中，不要比较浮点数的大小，如果需要精确的比较计算，请使用<code>bc*</code>系列函数。<br>还有一点，浮点数不准确和PHP没有任何关系，PHP不背这个锅。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/weixin.jpg" alt="zhjx922 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎关注二维码，一起交流学习！</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/浮点数/" rel="tag"># 浮点数</a>
+          
+            <a href="/tags/IEEE-754/" rel="tag"># IEEE 754</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/14/PHP中pack、unpack的用法/" rel="next" title="PHP中pack、unpack的用法">
+                <i class="fa fa-chevron-left"></i> PHP中pack、unpack的用法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/15/正确认识浮点数/"
+           data-title="正确认识浮点数" data-url="https://zhaojingxian.cn/2017/02/15/正确认识浮点数/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars3.githubusercontent.com/u/3774194?v=3&s=460"
+               alt="zhjx922" />
+          <p class="site-author-name" itemprop="name">zhjx922</p>
+          <p class="site-description motion-element" itemprop="description">骑驴十三载，不知火烧是何味</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhjx922" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/zhjx922" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yezismile.com/" title="叶子个人博客" target="_blank">叶子个人博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#奇怪的结果"><span class="nav-number">1.</span> <span class="nav-text">奇怪的结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IEEE-754"><span class="nav-number">2.</span> <span class="nav-text">IEEE 754</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-阶码-的三种状态及对应的M表示"><span class="nav-number">3.</span> <span class="nav-text">E(阶码)的三种状态及对应的M表示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#规格化"><span class="nav-number">3.1.</span> <span class="nav-text">规格化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非规格化"><span class="nav-number">3.2.</span> <span class="nav-text">非规格化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特殊情况"><span class="nav-number">3.3.</span> <span class="nav-text">特殊情况</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不要比较浮点数"><span class="nav-number">4.</span> <span class="nav-text">不要比较浮点数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhjx922</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhaojingxian"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
