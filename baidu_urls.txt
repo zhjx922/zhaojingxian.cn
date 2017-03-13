@@ -1,1 +1,1 @@
-https://zhaojingxian.cn/2017/02/27/加密算法之非对称加密/
+https://zhaojingxian.cn/2017/03/13/自己实现随机数/
