@@ -1,1 +1,1 @@
-https://zhaojingxian.cn/2017/03/13/自己实现随机数/
+https://zhaojingxian.cn/2017/03/14/超简单的PHP验证码识别/
