@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="inode,posix," />
+  <meta name="keywords" content="北京,摇号,算法," />
 
 
 
@@ -89,115 +89,26 @@
 
 
 
-<meta name="description" content="Linux空间还有不少剩余，但有些时候会提示空间已满，这是为啥？
+<meta name="description" content="相信很多北京本地or北漂一族摇了N年车牌号的人大有人在，作为一个即将加入摇号大军的程序员，带着好奇心查看了一下摇号相关的规则和程序，是否公平公正公开公…
 
-df查看空间在日常使用中，有时候会发生如下情况，输入: df，显示如下：
-
-
-
-文件系统
-已用(I)%
-
-
-
-
-/dev/xvda1
-70%
-
-
-
-但是你创建文件或者文件夹的时候会提示你，空间已满！
-输入：df -i
-
-
-
-文件系统
-已用(I)%
-
-
-
-
-/dev/xvda1
-100%
-
-
-
-问题就在这里，-i表示:显示inod">
+官方信息温馨提示：摇号月的25日，在公证人员的公证下，工作人员按规则为审核通过的编码分配摇号基数序号，形成摇号池编码数据文件，并刻盘封存，将参与26日的摇号。26日摇号结束后，请您注意查询是否中签，中签后凭打印的“小客车配置指标确认通知书”办">
 <meta property="og:type" content="article">
-<meta property="og:title" content="inode介绍及用途">
-<meta property="og:url" content="https://zhaojingxian.cn/2017/02/16/inode介绍及用途/index.html">
+<meta property="og:title" content="北京小客车摇号程序PHP版">
+<meta property="og:url" content="https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/index.html">
 <meta property="og:site_name" content="zhjx922 De Blog">
-<meta property="og:description" content="Linux空间还有不少剩余，但有些时候会提示空间已满，这是为啥？
+<meta property="og:description" content="相信很多北京本地or北漂一族摇了N年车牌号的人大有人在，作为一个即将加入摇号大军的程序员，带着好奇心查看了一下摇号相关的规则和程序，是否公平公正公开公…
 
-df查看空间在日常使用中，有时候会发生如下情况，输入: df，显示如下：
-
-
-
-文件系统
-已用(I)%
-
-
-
-
-/dev/xvda1
-70%
-
-
-
-但是你创建文件或者文件夹的时候会提示你，空间已满！
-输入：df -i
-
-
-
-文件系统
-已用(I)%
-
-
-
-
-/dev/xvda1
-100%
-
-
-
-问题就在这里，-i表示:显示inod">
-<meta property="og:updated_time" content="2017-02-19T15:39:13.000Z">
+官方信息温馨提示：摇号月的25日，在公证人员的公证下，工作人员按规则为审核通过的编码分配摇号基数序号，形成摇号池编码数据文件，并刻盘封存，将参与26日的摇号。26日摇号结束后，请您注意查询是否中签，中签后凭打印的“小客车配置指标确认通知书”办">
+<meta property="og:image" content="https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/yaohaochengxu.jpg">
+<meta property="og:image" content="https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/res.jpg">
+<meta property="og:image" content="https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/yanzheng.jpg">
+<meta property="og:updated_time" content="2017-03-20T15:41:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="inode介绍及用途">
-<meta name="twitter:description" content="Linux空间还有不少剩余，但有些时候会提示空间已满，这是为啥？
+<meta name="twitter:title" content="北京小客车摇号程序PHP版">
+<meta name="twitter:description" content="相信很多北京本地or北漂一族摇了N年车牌号的人大有人在，作为一个即将加入摇号大军的程序员，带着好奇心查看了一下摇号相关的规则和程序，是否公平公正公开公…
 
-df查看空间在日常使用中，有时候会发生如下情况，输入: df，显示如下：
-
-
-
-文件系统
-已用(I)%
-
-
-
-
-/dev/xvda1
-70%
-
-
-
-但是你创建文件或者文件夹的时候会提示你，空间已满！
-输入：df -i
-
-
-
-文件系统
-已用(I)%
-
-
-
-
-/dev/xvda1
-100%
-
-
-
-问题就在这里，-i表示:显示inod">
+官方信息温馨提示：摇号月的25日，在公证人员的公证下，工作人员按规则为审核通过的编码分配摇号基数序号，形成摇号池编码数据文件，并刻盘封存，将参与26日的摇号。26日摇号结束后，请您注意查询是否中签，中签后凭打印的“小客车配置指标确认通知书”办">
+<meta name="twitter:image" content="https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/yaohaochengxu.jpg">
 
 
 
@@ -225,13 +136,13 @@ df查看空间在日常使用中，有时候会发生如下情况，输入: df�
 
 
 
-  <link rel="canonical" href="https://zhaojingxian.cn/2017/02/16/inode介绍及用途/"/>
+  <link rel="canonical" href="https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/"/>
 
 
 
 
 
-  <title> inode介绍及用途 | zhjx922 De Blog </title>
+  <title> 北京小客车摇号程序PHP版 | zhjx922 De Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -378,7 +289,7 @@ df查看空间在日常使用中，有时候会发生如下情况，输入: df�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://zhaojingxian.cn/2017/02/16/inode介绍及用途/">
+  <link itemprop="mainEntityOfPage" href="https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="zhjx922">
@@ -402,7 +313,7 @@ df查看空间在日常使用中，有时候会发生如下情况，输入: df�
             
             
               
-                inode介绍及用途
+                北京小客车摇号程序PHP版
               
             
           </h2>
@@ -417,8 +328,8 @@ df查看空间在日常使用中，有时候会发生如下情况，输入: df�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-16T14:38:16+08:00">
-                2017-02-16
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-19T23:22:41+08:00">
+                2017-03-19
               </time>
             
 
@@ -440,8 +351,8 @@ df查看空间在日常使用中，有时候会发生如下情况，输入: df�
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
                   </a>
                 </span>
 
@@ -458,8 +369,8 @@ df查看空间在日常使用中，有时候会发生如下情况，输入: df�
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/16/inode介绍及用途/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/16/inode介绍及用途/" itemprop="commentCount"></span>
+                <a href="/2017/03/19/北京小客车摇号程序PHP版/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/19/北京小客车摇号程序PHP版/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -486,65 +397,29 @@ df查看空间在日常使用中，有时候会发生如下情况，输入: df�
 
       
         <blockquote>
-<p>Linux空间还有不少剩余，但有些时候会提示空间已满，这是为啥？</p>
+<p>相信很多北京本地or北漂一族摇了N年车牌号的人大有人在，作为一个即将加入摇号大军的程序员，带着好奇心查看了一下摇号相关的规则和程序，是否公平公正公开公…</p>
 </blockquote>
-<h3 id="df查看空间"><a href="#df查看空间" class="headerlink" title="df查看空间"></a>df查看空间</h3><p>在日常使用中，有时候会发生如下情况，输入: <code>df</code>，显示如下：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">文件系统</th>
-<th style="text-align:center">已用(I)%</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">/dev/xvda1</td>
-<td style="text-align:center">70%</td>
-</tr>
-</tbody>
-</table>
-<p>但是你创建文件或者文件夹的时候会提示你，空间已满！</p>
-<p>输入：<code>df -i</code></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">文件系统</th>
-<th style="text-align:center">已用(I)%</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">/dev/xvda1</td>
-<td style="text-align:center">100%</td>
-</tr>
-</tbody>
-</table>
-<p>问题就在这里，<code>-i</code>表示:显示inode信息而非块使用量，那么inode又是什么呢？</p>
-<h3 id="inode"><a href="#inode" class="headerlink" title="inode"></a>inode</h3><p>inode中文意思为索引节点，这个索引的就是文件，我们知道Linux下一切皆为文件，inode记录的就是文件在硬盘获取其它设备上对应的储存位置。<br>文件名与目录名是便于使用的别名。一个文件系统对象可以有多个别名(比如软、硬连接)，但只能有一个inode，并用这个inode来索引文件系统对象的存储位置。<br>Linux中硬盘在格式化，后会将硬盘分为inode区、数据区、目录区。</p>
-<ul>
-<li>inode区记录的就是每个节点的节点类型、字节数、权限、创建时间等相关属性</li>
-<li>数据区当然是数据真正储存的地方了</li>
-<li>目录区记录的是目录下面文件的名称以及对应的inode</li>
-</ul>
-<p><strong>inode在生成分区的时候已经定义好了数量，如果inode使用完了，也就不能继续创建新的文件了</strong></p>
-<h3 id="POSIX-inode"><a href="#POSIX-inode" class="headerlink" title="POSIX inode"></a>POSIX inode</h3><p>POSIX标准强制规范了文件系统的行为。每个“文件系统对象”必须具有：</p>
-<ul>
-<li>以字节为单位表示的文件大小。</li>
-<li>设备ID，标识容纳该文件的设备。</li>
-<li>文件所有者的User ID。</li>
-<li>文件的Group ID</li>
-<li>文件的模式（mode），确定了文件的类型，以及它的所有者、它的group、其它用户访问此文件的权限。</li>
-<li>额外的系统与用户标志（flag），用来保护该文件。</li>
-<li>3个时间戳，记录了inode自身被修改（ctime, inode change time）、文件内容被修改（mtime, modification time）、最后一次访问（atime, access time）的时间。</li>
-<li>1个链接数，表示有多少个硬链接指向此inode。</li>
-<li>到文件系统存储位置的指针。通常是1K字节或者2K字节的存储容量为基本单位。</li>
-</ul>
-<h3 id="查询inode属性"><a href="#查询inode属性" class="headerlink" title="查询inode属性"></a>查询inode属性</h3><p>执行<code>stat file</code>会输出类似如下信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">文件：&quot;a.php&quot;</div><div class="line">  大小：4096      	块：8          IO 块：4096   目录</div><div class="line">设备：ca01h/51713d	Inode：276961      硬链接：2</div><div class="line">权限：(0755/drwxr-xr-x)  Uid：(    0/    root)   Gid：(    0/    root)</div><div class="line">最近访问：2017-02-18 17:16:02.916390626 +0800</div><div class="line">最近更改：2017-02-18 17:16:02.916390626 +0800</div><div class="line">最近改动：2017-02-18 17:16:02.916390626 +0800</div><div class="line">创建时间：-</div></pre></td></tr></table></figure>
-<h3 id="使用inode删除文件"><a href="#使用inode删除文件" class="headerlink" title="使用inode删除文件"></a>使用inode删除文件</h3><p>有时候服务器上因为各种原因会生成一些名字很奇怪的文件或者目录，想删除掉的话，可以直接通过inode删除</p>
-<p><code>ll -i</code>查看文件列表:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">276893 -rw-r--r--  1 root    root       0 2月  18 17:30 a.php</div><div class="line">268121 drwxr-xr-x  3 root    root    4096 2月  14 18:25 blog</div></pre></td></tr></table></figure>
-<p>执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm `find -inum 276893` //通过find查询inode为276893的文件名，然后删除</div></pre></td></tr></table></figure></p>
+<h3 id="官方信息"><a href="#官方信息" class="headerlink" title="官方信息"></a>官方信息</h3><p>温馨提示：摇号月的25日，在公证人员的公证下，工作人员按规则为审核通过的编码分配摇号基数序号，形成摇号池编码数据文件，并刻盘封存，将参与26日的摇号。26日摇号结束后，请您注意查询是否中签，中签后凭打印的“小客车配置指标确认通知书”办理购车手续。<br>特别说明：<br>1、摇号基数序号分配方法：首先，将当期所有审核通过的编码按从小到大的顺序分配序号；然后，第二阶梯及以上的编码按从小到大的顺序，接在后面继续分配序号；再然后，第三阶梯及以上的编码按从小到大的顺序，接在后面继续分配序号；以此类推。因此，高阶梯的编码所对应的多个摇号基数序号是不连号的，当期摇号基数序号总数=第一阶梯人数+第二阶梯人数×2+第三阶梯人数×3……<br>2、摇号方法：摇号程序从当期所有摇号基数序号中随机抽取中签者，高阶梯的编码对应多个摇号基数序号，于是享受了多倍的中签概率。摇号程序确保高阶梯编码的多个摇号基数序号最多只能摇中一个，当其中一个摇号基数序号中签，该编码即中签。</p>
+<h3 id="解读"><a href="#解读" class="headerlink" title="解读"></a>解读</h3><p>1、摇号月的25日会将所有摇号的数据存放到数据文件(一个csv文件集合的压缩包，后面会提到，这个是我们写摇号程序的关键数据)<br>2、摇号月的26日会摇出一个6位的随机数(这个是用来计算中签的关键)<br>3、第几阶梯就会为对应阶梯的人分配几个摇号基础序号，比如A现在是第三阶梯，B是第二阶梯，C是第一阶梯，那么对应的排序就为<strong><em>ABCABA(123456)</em></strong></p>
+<h3 id="官方摇号程序"><a href="#官方摇号程序" class="headerlink" title="官方摇号程序"></a>官方摇号程序</h3><p>为了公平公正，官方提供了可执行的摇号程序，已经对应摇号期数的摇号数据提供了下载。</p>
+<p><img src="/2017/03/19/北京小客车摇号程序PHP版/yaohaochengxu.jpg" alt="摇号程序"></p>
+<p>温馨提示了我们<code>Windows7操作系统，系统应当安装有.NET Framework 2.0</code>，既然是.NET，那我们就反编译一下，看看到底是怎么计算的~</p>
+<h3 id="反编译"><a href="#反编译" class="headerlink" title="反编译"></a>反编译</h3><p>使用反编译工具<code>ILSPY</code>，直接搞定，我们会发现源程序是C#写的，关键代码放在<code>AllRandomPick.cs</code>中，其中最关键的两句为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Random random = new Random(allRandomPickData.Seed);</div><div class="line">pickNumber = random.Next(allRandomPickData.TotalNumber);</div></pre></td></tr></table></figure></p>
+<p>Random为C#自带的随机函数<br>allRandomPickData.Seed 表示6位随机种子数<br>allRandomPickData.TotalNumber 表示摇号池编码数</p>
+<p>这么看来，如果确保随机种子数是随机的话，这个算法可以认为是”绝对”公平的。<br>如果作弊的话，一是控制随机种子数，二是伪造摇号编码插入到对应的位置。<br>从此看来，大家还是乖乖摇号或者买新能源吧。。。</p>
+<h3 id="提取C-随机数类"><a href="#提取C-随机数类" class="headerlink" title="提取C#随机数类"></a>提取C#随机数类</h3><p>官方虽然提供了C#版的摇号程序，但是作为世界上最好的语言PHP怎能不尝试一下呢？</p>
+<p>从之前的文章 <a href="https://zhaojingxian.cn/2017/03/13/%E8%87%AA%E5%B7%B1%E5%AE%9E%E7%8E%B0%E9%9A%8F%E6%9C%BA%E6%95%B0/">自己实现随机数</a>，我们不难发现，如果随机种子的固定的话，那么我们产生的随机数也是固定的。</p>
+<p>但是不同语言的随机数实现方法是不同的，我们要向实现C#版的random，就必须知道C#纠结是如何生成随机数的。</p>
+<p>感谢微软开源(不开源的话，可能没法用PHP实现了)，让我轻松的找到了对应的实现方法 <a href="https://github.com/dotnet/coreclr/blob/32f0f9721afb584b4a14d69135bea7ddc129f755/src/mscorlib/src/System/Random.cs" target="_blank" rel="external">https://github.com/dotnet/coreclr/blob/32f0f9721afb584b4a14d69135bea7ddc129f755/src/mscorlib/src/System/Random.cs</a></p>
+<p>既然已经有了源代码，我们只要将C#翻译成PHP就可以了。</p>
+<h3 id="分析压缩包"><a href="#分析压缩包" class="headerlink" title="分析压缩包"></a>分析压缩包</h3><p>官方提供了每期的压缩包，我们解压之后，能够看到一堆的文件列表，随便打开一个A列代表了当前的基础序号，B列代表了对应的摇号编码，如果随机到的基础序号对应的是你的编码，那么，就该恭喜你了。</p>
+<h3 id="PHP实现"><a href="#PHP实现" class="headerlink" title="PHP实现"></a>PHP实现</h3><p>随机类有了，只要使用随机种子初始化随机类，然后在总编码数范围内随机，next…next…直到全部指标分配完就可以了，代码我放到了 <a href="https://github.com/zhjx922/yaohao" target="_blank" rel="external">github</a> 上，有兴趣的小伙伴可以阅读原文查看。</p>
+<p>再放个最终的运行结果：</p>
+<p><img src="/2017/03/19/北京小客车摇号程序PHP版/res.jpg" alt="摇号程序"></p>
+<p>到官网上验证一下：</p>
+<p><img src="/2017/03/19/北京小客车摇号程序PHP版/yanzheng.jpg" alt="摇号程序"></p>
+<h3 id="摇号越久就越容易中么？"><a href="#摇号越久就越容易中么？" class="headerlink" title="摇号越久就越容易中么？"></a>摇号越久就越容易中么？</h3><p>不是，虽然你的倍数一直在增加，但是和你一起摇的人的倍数也在增加，后面加入的人也越来越多，毕竟指标数在变得越来越少。</p>
+<h3 id="真的没办法提供概率了么？"><a href="#真的没办法提供概率了么？" class="headerlink" title="真的没办法提供概率了么？"></a>真的没办法提供概率了么？</h3><p>有，比如转发本文试试。</p>
 
       
     </div>
@@ -572,9 +447,11 @@ df查看空间在日常使用中，有时候会发生如下情况，输入: df�
       
         <div class="post-tags">
           
-            <a href="/tags/inode/" rel="tag"># inode</a>
+            <a href="/tags/北京/" rel="tag"># 北京</a>
           
-            <a href="/tags/posix/" rel="tag"># posix</a>
+            <a href="/tags/摇号/" rel="tag"># 摇号</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
           
         </div>
       
@@ -598,8 +475,8 @@ df查看空间在日常使用中，有时候会发生如下情况，输入: df�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/15/正确认识浮点数/" rel="next" title="正确认识浮点数">
-                <i class="fa fa-chevron-left"></i> 正确认识浮点数
+              <a href="/2017/03/14/超简单的PHP验证码识别/" rel="next" title="超简单的PHP验证码识别">
+                <i class="fa fa-chevron-left"></i> 超简单的PHP验证码识别
               </a>
             
           </div>
@@ -607,10 +484,6 @@ df查看空间在日常使用中，有时候会发生如下情况，输入: df�
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/19/加密算法之对称加密/" rel="prev" title="加密算法之对称加密">
-                加密算法之对称加密 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -636,8 +509,8 @@ df查看空间在日常使用中，有时候会发生如下情况，输入: df�
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/02/16/inode介绍及用途/"
-           data-title="inode介绍及用途" data-url="https://zhaojingxian.cn/2017/02/16/inode介绍及用途/">
+      <div class="ds-thread" data-thread-key="2017/03/19/北京小客车摇号程序PHP版/"
+           data-title="北京小客车摇号程序PHP版" data-url="https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/">
       </div>
     
   </div>
@@ -786,7 +659,7 @@ df查看空间在日常使用中，有时候会发生如下情况，输入: df�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#df查看空间"><span class="nav-number">1.</span> <span class="nav-text">df查看空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inode"><span class="nav-number">2.</span> <span class="nav-text">inode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POSIX-inode"><span class="nav-number">3.</span> <span class="nav-text">POSIX inode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询inode属性"><span class="nav-number">4.</span> <span class="nav-text">查询inode属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用inode删除文件"><span class="nav-number">5.</span> <span class="nav-text">使用inode删除文件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#官方信息"><span class="nav-number">1.</span> <span class="nav-text">官方信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解读"><span class="nav-number">2.</span> <span class="nav-text">解读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#官方摇号程序"><span class="nav-number">3.</span> <span class="nav-text">官方摇号程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反编译"><span class="nav-number">4.</span> <span class="nav-text">反编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提取C-随机数类"><span class="nav-number">5.</span> <span class="nav-text">提取C#随机数类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析压缩包"><span class="nav-number">6.</span> <span class="nav-text">分析压缩包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP实现"><span class="nav-number">7.</span> <span class="nav-text">PHP实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#摇号越久就越容易中么？"><span class="nav-number">8.</span> <span class="nav-text">摇号越久就越容易中么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#真的没办法提供概率了么？"><span class="nav-number">9.</span> <span class="nav-text">真的没办法提供概率了么？</span></a></li></ol></div>
             
 
           </div>
