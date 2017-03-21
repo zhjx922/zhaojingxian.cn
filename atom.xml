@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhaojingxian.cn/"/>
-  <updated>2017-03-20T15:41:50.000Z</updated>
+  <updated>2017-03-21T02:35:08.000Z</updated>
   <id>https://zhaojingxian.cn/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://zhaojingxian.cn/2017/03/19/%E5%8C%97%E4%BA%AC%E5%B0%8F%E5%AE%A2%E8%BD%A6%E6%91%87%E5%8F%B7%E7%A8%8B%E5%BA%8FPHP%E7%89%88/"/>
     <id>https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/</id>
     <published>2017-03-19T15:22:41.000Z</published>
-    <updated>2017-03-20T15:41:50.000Z</updated>
+    <updated>2017-03-21T02:35:08.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>相信很多北京本地or北漂一族摇了N年车牌号的人大有人在，作为一个即将加入摇号大军的程序员，带着好奇心查看了一下摇号相关的规则和程序，是否公平公正公开公…</p>
@@ -45,7 +45,7 @@
 <p>到官网上验证一下：</p>
 <p><img src="/2017/03/19/北京小客车摇号程序PHP版/yanzheng.jpg" alt="摇号程序"></p>
 <h3 id="摇号越久就越容易中么？"><a href="#摇号越久就越容易中么？" class="headerlink" title="摇号越久就越容易中么？"></a>摇号越久就越容易中么？</h3><p>不是，虽然你的倍数一直在增加，但是和你一起摇的人的倍数也在增加，后面加入的人也越来越多，毕竟指标数在变得越来越少。</p>
-<h3 id="真的没办法提供概率了么？"><a href="#真的没办法提供概率了么？" class="headerlink" title="真的没办法提供概率了么？"></a>真的没办法提供概率了么？</h3><p>有，比如转发本文试试。</p>
+<h3 id="真的没办法提高概率了么？"><a href="#真的没办法提高概率了么？" class="headerlink" title="真的没办法提高概率了么？"></a>真的没办法提高概率了么？</h3><p>有，比如下方二维码试试</p>
 ]]></content>
     
     <summary type="html">
