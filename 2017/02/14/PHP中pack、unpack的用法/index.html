@@ -102,7 +102,7 @@ pack1string pack ( string $format [, mixed $args [, mixed $... ]] )
 该函数用来将对应的参数($args)打包成二进制字符串。
 其中第一个参数$format，有如">
 <meta property="og:image" content="https://zhaojingxian.cn/2017/02/14/PHP中pack、unpack的用法/ascii.jpg">
-<meta property="og:updated_time" content="2017-02-15T05:14:25.000Z">
+<meta property="og:updated_time" content="2017-03-21T03:48:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP中pack、unpack的用法">
 <meta name="twitter:description" content="PHP中有两个函数pack和unpack，很多PHPer在实际项目中从来没有使用过，甚至也不知道这两个方法是用来干嘛的。这篇文章来为大家介绍一下它俩到底是用来干啥的。
@@ -519,6 +519,7 @@ pack1string pack ( string $format [, mixed $args [, mixed $... ]] )
 </tbody>
 </table>
 <p>这么多参数看下来，我第一次是真心懵逼了，大部分说明都很好理解，但是其中的主机、大端、小端等字节序是什么鬼呢？接下里的内容比较枯燥，但必须理解才行，坚持吧。</p>
+<a id="more"></a>
 <h3 id="字节序是什么？"><a href="#字节序是什么？" class="headerlink" title="字节序是什么？"></a>字节序是什么？</h3><p>就是字节的顺序，说白了就是多字节数据的存放顺序(一个字节显然不需要顺序)。<br>比如<code>A</code>和<code>B</code>分别对应的二进制表示为<code>0100 0001</code>、<code>0100 0010</code>。对于储存字符串<code>AB</code>，我们可以<code>0100 0001 0100 0010</code>也可以<code>0100 0010 0100 0001</code>，这个顺序就是所谓的字节序。</p>
 <h3 id="高-低位字节"><a href="#高-低位字节" class="headerlink" title="高/低位字节"></a>高/低位字节</h3><p>比如字符串<code>AB</code>，左高右低(我们正常的阅读顺序)，<code>A</code>为高字节，<code>B</code>为低字节</p>
 <h3 id="高-低地址"><a href="#高-低地址" class="headerlink" title="高/低地址"></a>高/低地址</h3><p>假设0x123456是按从高位到底位的顺序储存，内存中是这样存放的：</p>

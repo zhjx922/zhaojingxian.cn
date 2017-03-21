@@ -102,7 +102,7 @@ IEEE 754浮点数在计算机中是根据IEEE 754(二进制浮点数算数标准
 很奇怪吧！1-0.9怎么能不等于0.1呢？这是为什么呢？这要从浮点数的储存标准开始说。
 IEEE 754浮点数在计算机中是根据IEEE 754(二进制浮点数算数标准)储存的。计算公式为: (-1)^S x M">
 <meta property="og:image" content="https://zhaojingxian.cn/2017/02/15/正确认识浮点数/exp.jpg">
-<meta property="og:updated_time" content="2017-02-15T17:38:11.000Z">
+<meta property="og:updated_time" content="2017-03-21T03:47:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正确认识浮点数">
 <meta name="twitter:description" content="大家在日常开发中，必然使用过浮点数，也会发现浮点数不是精确的，那究竟是什么原因造成的呢？
@@ -445,6 +445,7 @@ IEEE 754浮点数在计算机中是根据IEEE 754(二进制浮点数算数标准
 <li>M: 尾数(二进制小数,数字的实体部分)</li>
 </ul>
 <p>M(尾数)和E(阶码)不同情况需要分别对待</p>
+<a id="more"></a>
 <h3 id="E-阶码-的三种状态及对应的M表示"><a href="#E-阶码-的三种状态及对应的M表示" class="headerlink" title="E(阶码)的三种状态及对应的M表示"></a>E(阶码)的三种状态及对应的M表示</h3><p><img src="/2017/02/15/正确认识浮点数/exp.jpg" alt="exp"></p>
 <p>从图中(截图于深入理解计算机系统)我们可以分为三种情况(第三种又分为两种特殊情况)</p>
 <h4 id="规格化"><a href="#规格化" class="headerlink" title="规格化"></a>规格化</h4><p>E既不等于0也不等于255(将S按十进制计算)，这个时候的<code>E=E-127</code>，M的二进制小数默认省略了<code>1.</code>，也就是<code>M=1.M(二进制小数)</code><br>我们做一个简单的测试看一下二进制<code>00111110001000000000000000000000</code>(32位)表示的对应的浮点数为多少？</p>

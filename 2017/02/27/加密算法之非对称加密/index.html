@@ -97,7 +97,7 @@
 <meta property="og:description" content="上篇文章介绍了对称加密的原理，但是它的最大问题就是加密和解密的密钥是相同的，并且不能保证密钥能安全的送到双方手里，即使安全的送到双方手里，免不了内部会有”卧底”的存在
 
 非对称加密既然有对称加密，那么自然会联想到非对称加密。非对称加密的核心在于加密和解密使用的是不同的密钥，如何做到使用不同的密钥呢？比如我有一个只能用钥匙打开的存钱罐，平时大家只能把零钱放到储钱罐中，但是只有我才有取钱的钥匙。放到">
-<meta property="og:updated_time" content="2017-02-27T15:31:07.000Z">
+<meta property="og:updated_time" content="2017-03-21T03:47:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="加密算法之非对称加密">
 <meta name="twitter:description" content="上篇文章介绍了对称加密的原理，但是它的最大问题就是加密和解密的密钥是相同的，并且不能保证密钥能安全的送到双方手里，即使安全的送到双方手里，免不了内部会有”卧底”的存在
@@ -396,6 +396,7 @@
 <h3 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h3><p>既然有对称加密，那么自然会联想到非对称加密。非对称加密的核心在于加密和解密使用的是不同的密钥，如何做到使用不同的密钥呢？<br>比如我有一个只能用钥匙打开的存钱罐，平时大家只能把零钱放到储钱罐中，但是只有我才有取钱的钥匙。放到储钱罐的硬币可以看成加密后的内容，而只有用钥匙才能将”加密”后的硬币取出来。<br>这样我们就可以把用来加密的密钥(公钥)给了任何人，我们只要自己保存好解密的密钥(私钥)就可以安全的保护我们的数据。<br>非对称算法有很多:RSA、Elgamal、背包算法、Rabin、D-H、ECC等，下面我们来简单介绍一下RSA算法。</p>
 <h3 id="RSA算法"><a href="#RSA算法" class="headerlink" title="RSA算法"></a>RSA算法</h3><p>RSA公钥加密算法是1977年由罗纳德·李维斯特（Ron Rivest）、阿迪·萨莫尔（Adi Shamir）和伦纳德·阿德曼（Leonard Adleman）一起提出的。1987年首次公布，当时他们三人都在麻省理工学院工作。RSA就是他们三人姓氏开头字母拼在一起组成的(啥时候以我名字命名一个呢)。<br>RSA是目前最有影响力的公钥加密算法，它能够抵抗到目前为止已知的绝大多数密码攻击，已被ISO推荐为公钥数据加密标准。</p>
 <h3 id="RSA加密-amp-amp-RSA解密公式"><a href="#RSA加密-amp-amp-RSA解密公式" class="headerlink" title="RSA加密&amp;&amp;RSA解密公式"></a>RSA加密&amp;&amp;RSA解密公式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//注意：明文为数字，实际计算过程我们可以通过ASCII码转换</div><div class="line">密文 = (明文 ^ E) % N; //其中的E和N就是我们的公钥</div><div class="line"></div><div class="line">明文 = (密文 ^ D) % N; //其中的D和N就是我们的私钥</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <h3 id="计算公钥-E-、私钥-D-和数字-N"><a href="#计算公钥-E-、私钥-D-和数字-N" class="headerlink" title="计算公钥(E)、私钥(D)和数字(N)"></a>计算公钥(E)、私钥(D)和数字(N)</h3><p>公钥和私钥不是随便弄几个数字就可以的，是经过严格的数学公式计算出来的。</p>
 <h4 id="1、随机准备两个质数P和Q-计算乘积得到N"><a href="#1、随机准备两个质数P和Q-计算乘积得到N" class="headerlink" title="1、随机准备两个质数P和Q,计算乘积得到N"></a>1、随机准备两个质数P和Q,计算乘积得到N</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">N = P * Q;</div></pre></td></tr></table></figure>
 <h4 id="2、计算L"><a href="#2、计算L" class="headerlink" title="2、计算L"></a>2、计算L</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">L = (P - 1) * (Q - 1); //图解密码技术中说需要计算乘积之后的最小公倍数，但是经过代码测试并不准确，哪位大侠了解麻烦留言告知一下~</div></pre></td></tr></table></figure>

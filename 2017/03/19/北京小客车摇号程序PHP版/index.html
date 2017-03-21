@@ -100,7 +100,7 @@
 <meta property="og:image" content="https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/yaohaochengxu.jpg">
 <meta property="og:image" content="https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/res.jpg">
 <meta property="og:image" content="https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/yanzheng.jpg">
-<meta property="og:updated_time" content="2017-03-21T02:35:08.000Z">
+<meta property="og:updated_time" content="2017-03-21T03:46:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="北京小客车摇号程序PHP版">
 <meta name="twitter:description" content="相信很多北京本地or北漂一族摇了N年车牌号的人大有人在，作为一个即将加入摇号大军的程序员，带着好奇心查看了一下摇号相关的规则和程序，是否公平公正公开公…
@@ -402,6 +402,7 @@
 <h3 id="官方摇号程序"><a href="#官方摇号程序" class="headerlink" title="官方摇号程序"></a>官方摇号程序</h3><p>为了公平公正，官方提供了可执行的摇号程序，已经对应摇号期数的摇号数据提供了下载。</p>
 <p><img src="/2017/03/19/北京小客车摇号程序PHP版/yaohaochengxu.jpg" alt="摇号程序"></p>
 <p>温馨提示了我们<code>Windows7操作系统，系统应当安装有.NET Framework 2.0</code>，既然是.NET，那我们就反编译一下，看看到底是怎么计算的~</p>
+<a id="more"></a>
 <h3 id="反编译"><a href="#反编译" class="headerlink" title="反编译"></a>反编译</h3><p>使用反编译工具<code>ILSPY</code>，直接搞定，我们会发现源程序是C#写的，关键代码放在<code>AllRandomPick.cs</code>中，其中最关键的两句为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Random random = new Random(allRandomPickData.Seed);</div><div class="line">pickNumber = random.Next(allRandomPickData.TotalNumber);</div></pre></td></tr></table></figure></p>
 <p>Random为C#自带的随机函数<br>allRandomPickData.Seed 表示6位随机种子数<br>allRandomPickData.TotalNumber 表示摇号池编码数</p>
 <p>这么看来，如果确保随机种子数是随机的话，这个算法可以认为是”绝对”公平的。<br>如果作弊的话，一是控制随机种子数，二是伪造摇号编码插入到对应的位置。<br>从此看来，大家还是乖乖摇号或者买新能源吧。。。</p>

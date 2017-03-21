@@ -110,7 +110,7 @@
 <meta property="og:image" content="https://zhaojingxian.cn/2017/03/14/超简单的PHP验证码识别/res.jpg">
 <meta property="og:image" content="https://zhaojingxian.cn/2017/03/14/超简单的PHP验证码识别/wu.png">
 <meta property="og:image" content="https://zhaojingxian.cn/2017/03/14/超简单的PHP验证码识别/weixin.jpeg">
-<meta property="og:updated_time" content="2017-03-16T18:02:24.000Z">
+<meta property="og:updated_time" content="2017-03-21T03:47:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="超简单的PHP验证码识别">
 <meta name="twitter:description" content="网站的登陆页、注册页等等等到处都是验证码，然而你的验证码真的安全么？也许只需要一段简单的小程序，你的验证码就会如同虚设。本文只是简单实现，不会太过深入。
@@ -414,6 +414,7 @@
 <h3 id="生成验证码"><a href="#生成验证码" class="headerlink" title="生成验证码"></a>生成验证码</h3><p>Copy代码，执行，生成如下验证码：</p>
 <p><img src="/2017/03/14/超简单的PHP验证码识别/vcode.jpg" alt="验证码"></p>
 <p>如图我们能发现，这个验证码格式特别”规范”，字体大小一样，颜色都是黑色，让我们省了不少事儿。</p>
+<a id="more"></a>
 <h3 id="二值化"><a href="#二值化" class="headerlink" title="二值化"></a>二值化</h3><p>程序读图，二值化(关键点在于查找字体颜色的阈值，这个验证码都是黑色，so…)，通过程序一个像素点一个像素点判断，将属于字体颜色的标记为*，非字体颜色标记为0</p>
 <p><img src="/2017/03/14/超简单的PHP验证码识别/er.jpg" alt="验证码"></p>
 <center>从上面的图，能够大概看出验证码的样子(<code>YTAD</code>)</center>

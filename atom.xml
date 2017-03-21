@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhaojingxian.cn/"/>
-  <updated>2017-03-21T02:35:08.000Z</updated>
+  <updated>2017-03-21T03:46:40.000Z</updated>
   <id>https://zhaojingxian.cn/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://zhaojingxian.cn/2017/03/19/%E5%8C%97%E4%BA%AC%E5%B0%8F%E5%AE%A2%E8%BD%A6%E6%91%87%E5%8F%B7%E7%A8%8B%E5%BA%8FPHP%E7%89%88/"/>
     <id>https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/</id>
     <published>2017-03-19T15:22:41.000Z</published>
-    <updated>2017-03-21T02:35:08.000Z</updated>
+    <updated>2017-03-21T03:46:40.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>相信很多北京本地or北漂一族摇了N年车牌号的人大有人在，作为一个即将加入摇号大军的程序员，带着好奇心查看了一下摇号相关的规则和程序，是否公平公正公开公…</p>
@@ -30,6 +30,7 @@
 <h3 id="官方摇号程序"><a href="#官方摇号程序" class="headerlink" title="官方摇号程序"></a>官方摇号程序</h3><p>为了公平公正，官方提供了可执行的摇号程序，已经对应摇号期数的摇号数据提供了下载。</p>
 <p><img src="/2017/03/19/北京小客车摇号程序PHP版/yaohaochengxu.jpg" alt="摇号程序"></p>
 <p>温馨提示了我们<code>Windows7操作系统，系统应当安装有.NET Framework 2.0</code>，既然是.NET，那我们就反编译一下，看看到底是怎么计算的~</p>
+<a id="more"></a>
 <h3 id="反编译"><a href="#反编译" class="headerlink" title="反编译"></a>反编译</h3><p>使用反编译工具<code>ILSPY</code>，直接搞定，我们会发现源程序是C#写的，关键代码放在<code>AllRandomPick.cs</code>中，其中最关键的两句为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Random random = new Random(allRandomPickData.Seed);</div><div class="line">pickNumber = random.Next(allRandomPickData.TotalNumber);</div></pre></td></tr></table></figure></p>
 <p>Random为C#自带的随机函数<br>allRandomPickData.Seed 表示6位随机种子数<br>allRandomPickData.TotalNumber 表示摇号池编码数</p>
 <p>这么看来，如果确保随机种子数是随机的话，这个算法可以认为是”绝对”公平的。<br>如果作弊的话，一是控制随机种子数，二是伪造摇号编码插入到对应的位置。<br>从此看来，大家还是乖乖摇号或者买新能源吧。。。</p>
@@ -53,7 +54,11 @@
       &lt;blockquote&gt;
 &lt;p&gt;相信很多北京本地or北漂一族摇了N年车牌号的人大有人在，作为一个即将加入摇号大军的程序员，带着好奇心查看了一下摇号相关的规则和程序，是否公平公正公开公…&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3 id=&quot;官方信息&quot;&gt;&lt;a href=&quot;#官方信息&quot;
+&lt;h3 id=&quot;官方信息&quot;&gt;&lt;a href=&quot;#官方信息&quot; class=&quot;headerlink&quot; title=&quot;官方信息&quot;&gt;&lt;/a&gt;官方信息&lt;/h3&gt;&lt;p&gt;温馨提示：摇号月的25日，在公证人员的公证下，工作人员按规则为审核通过的编码分配摇号基数序号，形成摇号池编码数据文件，并刻盘封存，将参与26日的摇号。26日摇号结束后，请您注意查询是否中签，中签后凭打印的“小客车配置指标确认通知书”办理购车手续。&lt;br&gt;特别说明：&lt;br&gt;1、摇号基数序号分配方法：首先，将当期所有审核通过的编码按从小到大的顺序分配序号；然后，第二阶梯及以上的编码按从小到大的顺序，接在后面继续分配序号；再然后，第三阶梯及以上的编码按从小到大的顺序，接在后面继续分配序号；以此类推。因此，高阶梯的编码所对应的多个摇号基数序号是不连号的，当期摇号基数序号总数=第一阶梯人数+第二阶梯人数×2+第三阶梯人数×3……&lt;br&gt;2、摇号方法：摇号程序从当期所有摇号基数序号中随机抽取中签者，高阶梯的编码对应多个摇号基数序号，于是享受了多倍的中签概率。摇号程序确保高阶梯编码的多个摇号基数序号最多只能摇中一个，当其中一个摇号基数序号中签，该编码即中签。&lt;/p&gt;
+&lt;h3 id=&quot;解读&quot;&gt;&lt;a href=&quot;#解读&quot; class=&quot;headerlink&quot; title=&quot;解读&quot;&gt;&lt;/a&gt;解读&lt;/h3&gt;&lt;p&gt;1、摇号月的25日会将所有摇号的数据存放到数据文件(一个csv文件集合的压缩包，后面会提到，这个是我们写摇号程序的关键数据)&lt;br&gt;2、摇号月的26日会摇出一个6位的随机数(这个是用来计算中签的关键)&lt;br&gt;3、第几阶梯就会为对应阶梯的人分配几个摇号基础序号，比如A现在是第三阶梯，B是第二阶梯，C是第一阶梯，那么对应的排序就为&lt;strong&gt;&lt;em&gt;ABCABA(123456)&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;官方摇号程序&quot;&gt;&lt;a href=&quot;#官方摇号程序&quot; class=&quot;headerlink&quot; title=&quot;官方摇号程序&quot;&gt;&lt;/a&gt;官方摇号程序&lt;/h3&gt;&lt;p&gt;为了公平公正，官方提供了可执行的摇号程序，已经对应摇号期数的摇号数据提供了下载。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/2017/03/19/北京小客车摇号程序PHP版/yaohaochengxu.jpg&quot; alt=&quot;摇号程序&quot;&gt;&lt;/p&gt;
+&lt;p&gt;温馨提示了我们&lt;code&gt;Windows7操作系统，系统应当安装有.NET Framework 2.0&lt;/code&gt;，既然是.NET，那我们就反编译一下，看看到底是怎么计算的~&lt;/p&gt;
     
     </summary>
     
@@ -73,7 +78,7 @@
     <link href="https://zhaojingxian.cn/2017/03/14/%E8%B6%85%E7%AE%80%E5%8D%95%E7%9A%84PHP%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB/"/>
     <id>https://zhaojingxian.cn/2017/03/14/超简单的PHP验证码识别/</id>
     <published>2017-03-14T14:35:44.000Z</published>
-    <updated>2017-03-16T18:02:24.000Z</updated>
+    <updated>2017-03-21T03:47:25.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>网站的登陆页、注册页等等等到处都是验证码，然而你的验证码真的安全么？也许只需要一段简单的小程序，你的验证码就会如同虚设。本文只是简单实现，不会太过深入。</p>
@@ -82,6 +87,7 @@
 <h3 id="生成验证码"><a href="#生成验证码" class="headerlink" title="生成验证码"></a>生成验证码</h3><p>Copy代码，执行，生成如下验证码：</p>
 <p><img src="/2017/03/14/超简单的PHP验证码识别/vcode.jpg" alt="验证码"></p>
 <p>如图我们能发现，这个验证码格式特别”规范”，字体大小一样，颜色都是黑色，让我们省了不少事儿。</p>
+<a id="more"></a>
 <h3 id="二值化"><a href="#二值化" class="headerlink" title="二值化"></a>二值化</h3><p>程序读图，二值化(关键点在于查找字体颜色的阈值，这个验证码都是黑色，so…)，通过程序一个像素点一个像素点判断，将属于字体颜色的标记为*，非字体颜色标记为0</p>
 <p><img src="/2017/03/14/超简单的PHP验证码识别/er.jpg" alt="验证码"></p>
 <center>从上面的图，能够大概看出验证码的样子(<code>YTAD</code>)</center>
@@ -106,7 +112,10 @@
       &lt;blockquote&gt;
 &lt;p&gt;网站的登陆页、注册页等等等到处都是验证码，然而你的验证码真的安全么？也许只需要一段简单的小程序，你的验证码就会如同虚设。本文只是简单实现，不会太过深入。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3 id=&quot;有攻就有防&quot;&gt;&lt;a href=&quot;#有攻就有
+&lt;h3 id=&quot;有攻就有防&quot;&gt;&lt;a href=&quot;#有攻就有防&quot; class=&quot;headerlink&quot; title=&quot;有攻就有防&quot;&gt;&lt;/a&gt;有攻就有防&lt;/h3&gt;&lt;p&gt;写这篇文章完全是因为同事的公众号发了一篇文章叫”实践-写个验证码”，你简单写了一下，我就简单破解一些试试，生活处处有乐趣啊~&lt;/p&gt;
+&lt;h3 id=&quot;生成验证码&quot;&gt;&lt;a href=&quot;#生成验证码&quot; class=&quot;headerlink&quot; title=&quot;生成验证码&quot;&gt;&lt;/a&gt;生成验证码&lt;/h3&gt;&lt;p&gt;Copy代码，执行，生成如下验证码：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/2017/03/14/超简单的PHP验证码识别/vcode.jpg&quot; alt=&quot;验证码&quot;&gt;&lt;/p&gt;
+&lt;p&gt;如图我们能发现，这个验证码格式特别”规范”，字体大小一样，颜色都是黑色，让我们省了不少事儿。&lt;/p&gt;
     
     </summary>
     
@@ -124,7 +133,7 @@
     <link href="https://zhaojingxian.cn/2017/03/13/%E8%87%AA%E5%B7%B1%E5%AE%9E%E7%8E%B0%E9%9A%8F%E6%9C%BA%E6%95%B0/"/>
     <id>https://zhaojingxian.cn/2017/03/13/自己实现随机数/</id>
     <published>2017-03-13T15:28:25.000Z</published>
-    <updated>2017-03-13T16:06:19.000Z</updated>
+    <updated>2017-03-21T03:47:34.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>随机数函数rand大家一定都使用的炉火纯青了，但是如何你想自己实现一个rand函数该怎么办呢？这篇文章让我来简单介绍一下随机数的常用生成方法</p>
@@ -132,6 +141,7 @@
 <p>最近工作太忙，几乎没精力写文章，竟然有人催更，好在这段时间也没人取关，哈哈，那就小更一篇吧。</p>
 <h3 id="真假随机数"><a href="#真假随机数" class="headerlink" title="真假随机数"></a>真假随机数</h3><p>其实计算机中的随机数都是伪随机数，因为它并不是真正随机的。只有完全无法预测下一次的数字才能算是真正的随机数。<br>相抵比较”真随机”的方法有：通过当前温度+PM2.5+风力…、CPU温度+内存条温度+…。重点在于无法预测，但是这些随机数获取的成本也相对比较大。</p>
 <h3 id="线性同余法"><a href="#线性同余法" class="headerlink" title="线性同余法"></a>线性同余法</h3><p>大部分语言的随机数都是通过”线性同余法”生成的，这是什么鬼方程(哪位好学生给科普一下)？我们不管原理，只管实现~<br>线性同余法的方程为：<code>N2 = (A X N1 + B) % M</code>，仅当B能够被A与M的最大公约数整除，此方程有解。我们只要保证A和M互质就可以了。</p>
+<a id="more"></a>
 <p>下面是我用PHP的简单实现，如有错误，随便指出：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 伪随机数</div><div class="line"> * <span class="doctag">@author</span> zhjx922</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rand</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> $_sRand;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;_sRand = substr(microtime(<span class="keyword">true</span>), <span class="number">-3</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 种子生成器</div><div class="line">     * <span class="doctag">@return</span> string</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">sRand</span><span class="params">()</span> </span>&#123;</div><div class="line">        $a = <span class="number">33773</span>;</div><div class="line">        $b = <span class="number">97613</span>;</div><div class="line">        $m = <span class="number">65536</span>;</div><div class="line">        <span class="keyword">$this</span>-&gt;_sRand = bcmod(bcadd(bcmul($a, <span class="keyword">$this</span>-&gt;_sRand), $b), $m);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_sRand;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 查询随机数</div><div class="line">     * <span class="doctag">@param</span> $start</div><div class="line">     * <span class="doctag">@param</span> $end</div><div class="line">     * <span class="doctag">@return</span> string</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">rand</span><span class="params">($start, $end)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>($start == $end) &#123;</div><div class="line">            <span class="keyword">return</span> $start;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span>($start &gt; $end) &#123;</div><div class="line">            $max = $start;</div><div class="line">            $min = $end;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            $max = $end;</div><div class="line">            $min = $start;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        $sub = $max - $min;</div><div class="line">        <span class="keyword">return</span> (int)bcmod(<span class="keyword">$this</span>-&gt;sRand(), $sub + <span class="number">1</span>) + $min;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">$rand = <span class="keyword">new</span> Rand();</div><div class="line"></div><div class="line">$randNum = <span class="keyword">array</span>();</div><div class="line"><span class="keyword">for</span>($i=<span class="number">0</span>;$i&lt;<span class="number">10000</span>;$i++) &#123;</div><div class="line">    $num = $rand-&gt;rand(<span class="number">-50</span>, <span class="number">-66</span>);</div><div class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>($randNum[$num])) &#123;</div><div class="line">        $randNum[$num]++;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        $randNum[$num] = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">ksort($randNum);</div><div class="line">var_dump($randNum);</div></pre></td></tr></table></figure>
 <p>大家可以复制代码到本地跑一下，看看生成的效果如何，生成的随机数是否足够”随机”</p>
@@ -142,7 +152,9 @@
       &lt;blockquote&gt;
 &lt;p&gt;随机数函数rand大家一定都使用的炉火纯青了，但是如何你想自己实现一个rand函数该怎么办呢？这篇文章让我来简单介绍一下随机数的常用生成方法&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;最近工作太忙，几乎没精力写文章，竟然有人催更，好在这段时间也没人
+&lt;p&gt;最近工作太忙，几乎没精力写文章，竟然有人催更，好在这段时间也没人取关，哈哈，那就小更一篇吧。&lt;/p&gt;
+&lt;h3 id=&quot;真假随机数&quot;&gt;&lt;a href=&quot;#真假随机数&quot; class=&quot;headerlink&quot; title=&quot;真假随机数&quot;&gt;&lt;/a&gt;真假随机数&lt;/h3&gt;&lt;p&gt;其实计算机中的随机数都是伪随机数，因为它并不是真正随机的。只有完全无法预测下一次的数字才能算是真正的随机数。&lt;br&gt;相抵比较”真随机”的方法有：通过当前温度+PM2.5+风力…、CPU温度+内存条温度+…。重点在于无法预测，但是这些随机数获取的成本也相对比较大。&lt;/p&gt;
+&lt;h3 id=&quot;线性同余法&quot;&gt;&lt;a href=&quot;#线性同余法&quot; class=&quot;headerlink&quot; title=&quot;线性同余法&quot;&gt;&lt;/a&gt;线性同余法&lt;/h3&gt;&lt;p&gt;大部分语言的随机数都是通过”线性同余法”生成的，这是什么鬼方程(哪位好学生给科普一下)？我们不管原理，只管实现~&lt;br&gt;线性同余法的方程为：&lt;code&gt;N2 = (A X N1 + B) % M&lt;/code&gt;，仅当B能够被A与M的最大公约数整除，此方程有解。我们只要保证A和M互质就可以了。&lt;/p&gt;
     
     </summary>
     
@@ -162,7 +174,7 @@
     <link href="https://zhaojingxian.cn/2017/02/27/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E4%B9%8B%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/"/>
     <id>https://zhaojingxian.cn/2017/02/27/加密算法之非对称加密/</id>
     <published>2017-02-27T12:25:29.000Z</published>
-    <updated>2017-02-27T15:31:07.000Z</updated>
+    <updated>2017-03-21T03:47:51.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>上篇文章介绍了对称加密的原理，但是它的最大问题就是加密和解密的密钥是相同的，并且不能保证密钥能安全的送到双方手里，即使安全的送到双方手里，免不了内部会有”卧底”的存在</p>
@@ -170,6 +182,7 @@
 <h3 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h3><p>既然有对称加密，那么自然会联想到非对称加密。非对称加密的核心在于加密和解密使用的是不同的密钥，如何做到使用不同的密钥呢？<br>比如我有一个只能用钥匙打开的存钱罐，平时大家只能把零钱放到储钱罐中，但是只有我才有取钱的钥匙。放到储钱罐的硬币可以看成加密后的内容，而只有用钥匙才能将”加密”后的硬币取出来。<br>这样我们就可以把用来加密的密钥(公钥)给了任何人，我们只要自己保存好解密的密钥(私钥)就可以安全的保护我们的数据。<br>非对称算法有很多:RSA、Elgamal、背包算法、Rabin、D-H、ECC等，下面我们来简单介绍一下RSA算法。</p>
 <h3 id="RSA算法"><a href="#RSA算法" class="headerlink" title="RSA算法"></a>RSA算法</h3><p>RSA公钥加密算法是1977年由罗纳德·李维斯特（Ron Rivest）、阿迪·萨莫尔（Adi Shamir）和伦纳德·阿德曼（Leonard Adleman）一起提出的。1987年首次公布，当时他们三人都在麻省理工学院工作。RSA就是他们三人姓氏开头字母拼在一起组成的(啥时候以我名字命名一个呢)。<br>RSA是目前最有影响力的公钥加密算法，它能够抵抗到目前为止已知的绝大多数密码攻击，已被ISO推荐为公钥数据加密标准。</p>
 <h3 id="RSA加密-amp-amp-RSA解密公式"><a href="#RSA加密-amp-amp-RSA解密公式" class="headerlink" title="RSA加密&amp;&amp;RSA解密公式"></a>RSA加密&amp;&amp;RSA解密公式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//注意：明文为数字，实际计算过程我们可以通过ASCII码转换</div><div class="line">密文 = (明文 ^ E) % N; //其中的E和N就是我们的公钥</div><div class="line"></div><div class="line">明文 = (密文 ^ D) % N; //其中的D和N就是我们的私钥</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <h3 id="计算公钥-E-、私钥-D-和数字-N"><a href="#计算公钥-E-、私钥-D-和数字-N" class="headerlink" title="计算公钥(E)、私钥(D)和数字(N)"></a>计算公钥(E)、私钥(D)和数字(N)</h3><p>公钥和私钥不是随便弄几个数字就可以的，是经过严格的数学公式计算出来的。</p>
 <h4 id="1、随机准备两个质数P和Q-计算乘积得到N"><a href="#1、随机准备两个质数P和Q-计算乘积得到N" class="headerlink" title="1、随机准备两个质数P和Q,计算乘积得到N"></a>1、随机准备两个质数P和Q,计算乘积得到N</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">N = P * Q;</div></pre></td></tr></table></figure>
 <h4 id="2、计算L"><a href="#2、计算L" class="headerlink" title="2、计算L"></a>2、计算L</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">L = (P - 1) * (Q - 1); //图解密码技术中说需要计算乘积之后的最小公倍数，但是经过代码测试并不准确，哪位大侠了解麻烦留言告知一下~</div></pre></td></tr></table></figure>
@@ -194,7 +207,9 @@
       &lt;blockquote&gt;
 &lt;p&gt;上篇文章介绍了对称加密的原理，但是它的最大问题就是加密和解密的密钥是相同的，并且不能保证密钥能安全的送到双方手里，即使安全的送到双方手里，免不了内部会有”卧底”的存在&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3 id=&quot;非对称加密&quot;&gt;&lt;a href
+&lt;h3 id=&quot;非对称加密&quot;&gt;&lt;a href=&quot;#非对称加密&quot; class=&quot;headerlink&quot; title=&quot;非对称加密&quot;&gt;&lt;/a&gt;非对称加密&lt;/h3&gt;&lt;p&gt;既然有对称加密，那么自然会联想到非对称加密。非对称加密的核心在于加密和解密使用的是不同的密钥，如何做到使用不同的密钥呢？&lt;br&gt;比如我有一个只能用钥匙打开的存钱罐，平时大家只能把零钱放到储钱罐中，但是只有我才有取钱的钥匙。放到储钱罐的硬币可以看成加密后的内容，而只有用钥匙才能将”加密”后的硬币取出来。&lt;br&gt;这样我们就可以把用来加密的密钥(公钥)给了任何人，我们只要自己保存好解密的密钥(私钥)就可以安全的保护我们的数据。&lt;br&gt;非对称算法有很多:RSA、Elgamal、背包算法、Rabin、D-H、ECC等，下面我们来简单介绍一下RSA算法。&lt;/p&gt;
+&lt;h3 id=&quot;RSA算法&quot;&gt;&lt;a href=&quot;#RSA算法&quot; class=&quot;headerlink&quot; title=&quot;RSA算法&quot;&gt;&lt;/a&gt;RSA算法&lt;/h3&gt;&lt;p&gt;RSA公钥加密算法是1977年由罗纳德·李维斯特（Ron Rivest）、阿迪·萨莫尔（Adi Shamir）和伦纳德·阿德曼（Leonard Adleman）一起提出的。1987年首次公布，当时他们三人都在麻省理工学院工作。RSA就是他们三人姓氏开头字母拼在一起组成的(啥时候以我名字命名一个呢)。&lt;br&gt;RSA是目前最有影响力的公钥加密算法，它能够抵抗到目前为止已知的绝大多数密码攻击，已被ISO推荐为公钥数据加密标准。&lt;/p&gt;
+&lt;h3 id=&quot;RSA加密-amp-amp-RSA解密公式&quot;&gt;&lt;a href=&quot;#RSA加密-amp-amp-RSA解密公式&quot; class=&quot;headerlink&quot; title=&quot;RSA加密&amp;amp;&amp;amp;RSA解密公式&quot;&gt;&lt;/a&gt;RSA加密&amp;amp;&amp;amp;RSA解密公式&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;//注意：明文为数字，实际计算过程我们可以通过ASCII码转换&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;密文 = (明文 ^ E) % N; //其中的E和N就是我们的公钥&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;明文 = (密文 ^ D) % N; //其中的D和N就是我们的私钥&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
@@ -214,7 +229,7 @@
     <link href="https://zhaojingxian.cn/2017/02/19/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E4%B9%8B%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/"/>
     <id>https://zhaojingxian.cn/2017/02/19/加密算法之对称加密/</id>
     <published>2017-02-19T15:38:22.000Z</published>
-    <updated>2017-02-22T15:59:26.000Z</updated>
+    <updated>2017-03-21T03:47:57.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>在互联网如此发达的年代，信息的安全也变得越来越重要，我们也使用了各式各样的加密手段来保护数据的安全，但是各种加密算法你真的了解它么？他们的原理又是什么呢？<br>常见的加密分为对称加密、非对称加密还有散列算法(严格来说，散列不算加密)，这篇文章我们来了解一下对称加密</p>
@@ -223,6 +238,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">123:5 564:3 11:8</div><div class="line"></div><div class="line">665:2 123:3 456:6 789:2...</div></pre></td></tr></table></figure>
 <p><strong><em>123(代表页码):5(代表行)</em></strong></p>
 <p>从此之后，妹子再也不理你了(查字典太TM麻烦！)。。。<br>当然藏头诗也可以看做一种加密手段，前提是：你会写诗。。。</p>
+<a id="more"></a>
 <h3 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h3><p>对称加密简单来说就是使用<code>同一密钥</code>加密和解密内容，双方使用的密钥必须是相同的(其他任何人都不知道)，这样才能保证内容的安全(正如上面的传递小纸条)。<br>常见的对称加密算法有DES、3DES、AES、Blowfish等，它们的复杂程度也各不相等。<br>那么在计算机中如何做到类似上面小纸条的加密手段呢？</p>
 <h3 id="ASCII编码"><a href="#ASCII编码" class="headerlink" title="ASCII编码"></a>ASCII编码</h3><p>ASCII大家应该都熟悉，通过7位或者8位来表示一个字符，比如<code>65</code>表示字符<code>A</code>，<code>66</code>表示字符<code>B</code>，对应的二进制形式为：</p>
 <table>
@@ -262,7 +278,12 @@
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;在互联网如此发达的年代，信息的安全也变得越来越重要，我们也使用了各式各样的加密手段来保护数据的安全，但是各种加密算法你真的了解它么？他们的原理又是什么呢？&lt;br&gt;常见的加密分为对称加密、非对称加密还有散列算法(严格来说，散列不算加密)，这篇文章我们
+&lt;p&gt;在互联网如此发达的年代，信息的安全也变得越来越重要，我们也使用了各式各样的加密手段来保护数据的安全，但是各种加密算法你真的了解它么？他们的原理又是什么呢？&lt;br&gt;常见的加密分为对称加密、非对称加密还有散列算法(严格来说，散列不算加密)，这篇文章我们来了解一下对称加密&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;传递甜甜蜜蜜小纸条&quot;&gt;&lt;a href=&quot;#传递甜甜蜜蜜小纸条&quot; class=&quot;headerlink&quot; title=&quot;传递甜甜蜜蜜小纸条&quot;&gt;&lt;/a&gt;传递甜甜蜜蜜小纸条&lt;/h3&gt;&lt;p&gt;穿越到初中的你，凭借着程序员”高贵”的气息成功的和一个小女生”勾搭”上了。&lt;br&gt;然而在那个不是谁都有手机的年代，上课的时候想和她传递信息，貌似只能写在纸上，然后借助同学之手，慢慢传递。最关键的是，万一某个同学好奇心太重偷偷看到你们的”甜甜蜜蜜”，你也许会不太爽吧？&lt;br&gt;作为一个从未来穿越回来的程序员，你立马在周末的时候买了两本班上谁都没有的大字典(康熙字典)，从此你俩的小纸条上出现的是如下的内容：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;123:5 564:3 11:8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;665:2 123:3 456:6 789:2...&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;123(代表页码):5(代表行)&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;从此之后，妹子再也不理你了(查字典太TM麻烦！)。。。&lt;br&gt;当然藏头诗也可以看做一种加密手段，前提是：你会写诗。。。&lt;/p&gt;
     
     </summary>
     
@@ -286,7 +307,7 @@
     <link href="https://zhaojingxian.cn/2017/02/16/inode%E4%BB%8B%E7%BB%8D%E5%8F%8A%E7%94%A8%E9%80%94/"/>
     <id>https://zhaojingxian.cn/2017/02/16/inode介绍及用途/</id>
     <published>2017-02-16T06:38:16.000Z</published>
-    <updated>2017-02-19T15:39:13.000Z</updated>
+    <updated>2017-03-21T03:48:13.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>Linux空间还有不少剩余，但有些时候会提示空间已满，这是为啥？</p>
@@ -323,6 +344,7 @@
 </tbody>
 </table>
 <p>问题就在这里，<code>-i</code>表示:显示inode信息而非块使用量，那么inode又是什么呢？</p>
+<a id="more"></a>
 <h3 id="inode"><a href="#inode" class="headerlink" title="inode"></a>inode</h3><p>inode中文意思为索引节点，这个索引的就是文件，我们知道Linux下一切皆为文件，inode记录的就是文件在硬盘获取其它设备上对应的储存位置。<br>文件名与目录名是便于使用的别名。一个文件系统对象可以有多个别名(比如软、硬连接)，但只能有一个inode，并用这个inode来索引文件系统对象的存储位置。<br>Linux中硬盘在格式化，后会将硬盘分为inode区、数据区、目录区。</p>
 <ul>
 <li>inode区记录的就是每个节点的节点类型、字节数、权限、创建时间等相关属性</li>
@@ -355,7 +377,38 @@
       &lt;blockquote&gt;
 &lt;p&gt;Linux空间还有不少剩余，但有些时候会提示空间已满，这是为啥？&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3 id=&quot;df查看空间&quot;&gt;&lt;a href=&quot;#df查看空间&quot; class=&quot;headerlink&quot; title=&quot;df查看空间&quot;&gt;&lt;/a&gt;d
+&lt;h3 id=&quot;df查看空间&quot;&gt;&lt;a href=&quot;#df查看空间&quot; class=&quot;headerlink&quot; title=&quot;df查看空间&quot;&gt;&lt;/a&gt;df查看空间&lt;/h3&gt;&lt;p&gt;在日常使用中，有时候会发生如下情况，输入: &lt;code&gt;df&lt;/code&gt;，显示如下：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;文件系统&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;已用(I)%&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;/dev/xvda1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;70%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;但是你创建文件或者文件夹的时候会提示你，空间已满！&lt;/p&gt;
+&lt;p&gt;输入：&lt;code&gt;df -i&lt;/code&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;文件系统&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;已用(I)%&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;/dev/xvda1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;100%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;问题就在这里，&lt;code&gt;-i&lt;/code&gt;表示:显示inode信息而非块使用量，那么inode又是什么呢？&lt;/p&gt;
     
     </summary>
     
@@ -373,7 +426,7 @@
     <link href="https://zhaojingxian.cn/2017/02/15/%E6%AD%A3%E7%A1%AE%E8%AE%A4%E8%AF%86%E6%B5%AE%E7%82%B9%E6%95%B0/"/>
     <id>https://zhaojingxian.cn/2017/02/15/正确认识浮点数/</id>
     <published>2017-02-14T16:26:04.000Z</published>
-    <updated>2017-02-15T17:38:11.000Z</updated>
+    <updated>2017-03-21T03:47:42.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>大家在日常开发中，必然使用过浮点数，也会发现浮点数不是精确的，那究竟是什么原因造成的呢？</p>
@@ -422,6 +475,7 @@
 <li>M: 尾数(二进制小数,数字的实体部分)</li>
 </ul>
 <p>M(尾数)和E(阶码)不同情况需要分别对待</p>
+<a id="more"></a>
 <h3 id="E-阶码-的三种状态及对应的M表示"><a href="#E-阶码-的三种状态及对应的M表示" class="headerlink" title="E(阶码)的三种状态及对应的M表示"></a>E(阶码)的三种状态及对应的M表示</h3><p><img src="/2017/02/15/正确认识浮点数/exp.jpg" alt="exp"></p>
 <p>从图中(截图于深入理解计算机系统)我们可以分为三种情况(第三种又分为两种特殊情况)</p>
 <h4 id="规格化"><a href="#规格化" class="headerlink" title="规格化"></a>规格化</h4><p>E既不等于0也不等于255(将S按十进制计算)，这个时候的<code>E=E-127</code>，M的二进制小数默认省略了<code>1.</code>，也就是<code>M=1.M(二进制小数)</code><br>我们做一个简单的测试看一下二进制<code>00111110001000000000000000000000</code>(32位)表示的对应的浮点数为多少？</p>
@@ -447,7 +501,50 @@
       &lt;blockquote&gt;
 &lt;p&gt;大家在日常开发中，必然使用过浮点数，也会发现浮点数不是精确的，那究竟是什么原因造成的呢？&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3 id=&quot;奇怪的结果&quot;&gt;&lt;a href=&quot;#奇怪的结果&quot; class=&quot;headerlink&quot; title=&quot;奇怪的
+&lt;h3 id=&quot;奇怪的结果&quot;&gt;&lt;a href=&quot;#奇怪的结果&quot; class=&quot;headerlink&quot; title=&quot;奇怪的结果&quot;&gt;&lt;/a&gt;奇怪的结果&lt;/h3&gt;&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;var_dump((&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;number&quot;&gt;-0.9&lt;/span&gt;) == &lt;span class=&quot;number&quot;&gt;0.1&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//输出:bool(false)&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;很奇怪吧！1-0.9怎么能不等于0.1呢？这是为什么呢？这要从浮点数的储存标准开始说。&lt;/p&gt;
+&lt;h3 id=&quot;IEEE-754&quot;&gt;&lt;a href=&quot;#IEEE-754&quot; class=&quot;headerlink&quot; title=&quot;IEEE 754&quot;&gt;&lt;/a&gt;IEEE 754&lt;/h3&gt;&lt;p&gt;浮点数在计算机中是根据&lt;code&gt;IEEE 754&lt;/code&gt;(二进制浮点数算数标准)储存的。&lt;br&gt;计算公式为: (-1)^S x M x 2^E&lt;/p&gt;
+&lt;p&gt;32位单精度储存结构(对应占位)&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;符号(S)&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;阶码(E)&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;尾数(M)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;8&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;23&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;64位双精度储存结构(对应占位)&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;符号(S)&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;阶码(E)&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;尾数(M)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;11&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;52&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;解释:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;S: 符号(0正，1负)&lt;/li&gt;
+&lt;li&gt;E: 阶码(指数)&lt;/li&gt;
+&lt;li&gt;M: 尾数(二进制小数,数字的实体部分)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;M(尾数)和E(阶码)不同情况需要分别对待&lt;/p&gt;
     
     </summary>
     
@@ -465,7 +562,7 @@
     <link href="https://zhaojingxian.cn/2017/02/14/PHP%E4%B8%ADpack%E3%80%81unpack%E7%9A%84%E7%94%A8%E6%B3%95/"/>
     <id>https://zhaojingxian.cn/2017/02/14/PHP中pack、unpack的用法/</id>
     <published>2017-02-14T15:47:03.000Z</published>
-    <updated>2017-02-15T05:14:25.000Z</updated>
+    <updated>2017-03-21T03:48:05.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>PHP中有两个函数pack和unpack，很多PHPer在实际项目中从来没有使用过，甚至也不知道这两个方法是用来干嘛的。这篇文章来为大家介绍一下它俩到底是用来干啥的。</p>
@@ -588,6 +685,7 @@
 </tbody>
 </table>
 <p>这么多参数看下来，我第一次是真心懵逼了，大部分说明都很好理解，但是其中的主机、大端、小端等字节序是什么鬼呢？接下里的内容比较枯燥，但必须理解才行，坚持吧。</p>
+<a id="more"></a>
 <h3 id="字节序是什么？"><a href="#字节序是什么？" class="headerlink" title="字节序是什么？"></a>字节序是什么？</h3><p>就是字节的顺序，说白了就是多字节数据的存放顺序(一个字节显然不需要顺序)。<br>比如<code>A</code>和<code>B</code>分别对应的二进制表示为<code>0100 0001</code>、<code>0100 0010</code>。对于储存字符串<code>AB</code>，我们可以<code>0100 0001 0100 0010</code>也可以<code>0100 0010 0100 0001</code>，这个顺序就是所谓的字节序。</p>
 <h3 id="高-低位字节"><a href="#高-低位字节" class="headerlink" title="高/低位字节"></a>高/低位字节</h3><p>比如字符串<code>AB</code>，左高右低(我们正常的阅读顺序)，<code>A</code>为高字节，<code>B</code>为低字节</p>
 <h3 id="高-低地址"><a href="#高-低地址" class="headerlink" title="高/低地址"></a>高/低地址</h3><p>假设0x123456是按从高位到底位的顺序储存，内存中是这样存放的：</p>
@@ -624,7 +722,124 @@
       &lt;blockquote&gt;
 &lt;p&gt;PHP中有两个函数pack和unpack，很多PHPer在实际项目中从来没有使用过，甚至也不知道这两个方法是用来干嘛的。这篇文章来为大家介绍一下它俩到底是用来干啥的。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3 id=&quot;pack&quot;&gt;&lt;a href=
+&lt;h3 id=&quot;pack&quot;&gt;&lt;a href=&quot;#pack&quot; class=&quot;headerlink&quot; title=&quot;pack&quot;&gt;&lt;/a&gt;pack&lt;/h3&gt;&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;string pack ( string $format [, mixed $args [, mixed $... ]] )&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;该函数用来将对应的参数(&lt;code&gt;$args&lt;/code&gt;)打包成二进制字符串。&lt;/p&gt;
+&lt;p&gt;其中第一个参数$format，有如下选项(可选参数很多，后面会选几个常用的讲解)：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Code&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;a&lt;/td&gt;
+&lt;td&gt;以NUL字节填充字符串空白&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;A&lt;/td&gt;
+&lt;td&gt;以SPACE(空格)填充字符串&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;h&lt;/td&gt;
+&lt;td&gt;十六进制字符串，低位在前&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;H&lt;/td&gt;
+&lt;td&gt;十六进制字符串，高位在前&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;c&lt;/td&gt;
+&lt;td&gt;有符号字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;C&lt;/td&gt;
+&lt;td&gt;无符号字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;s&lt;/td&gt;
+&lt;td&gt;有符号短整型(16位，主机字节序)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;S&lt;/td&gt;
+&lt;td&gt;无符号短整型(16位，主机字节序)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;无符号短整型(16位，大端字节序)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;v&lt;/td&gt;
+&lt;td&gt;无符号短整型(16位，小端字节序)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;i&lt;/td&gt;
+&lt;td&gt;有符号整型(机器相关大小字节序)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;I&lt;/td&gt;
+&lt;td&gt;无符号整型(机器相关大小字节序)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;l&lt;/td&gt;
+&lt;td&gt;有符号长整型(32位，主机字节序)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;L&lt;/td&gt;
+&lt;td&gt;无符号长整型(32位，主机字节序)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;N&lt;/td&gt;
+&lt;td&gt;无符号长整型(32位，大端字节序)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;V&lt;/td&gt;
+&lt;td&gt;无符号长整型(32位，小端字节序)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;q&lt;/td&gt;
+&lt;td&gt;有符号长长整型(64位，主机字节序)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Q&lt;/td&gt;
+&lt;td&gt;无符号长长整型(64位，主机字节序)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;J&lt;/td&gt;
+&lt;td&gt;无符号长长整型(64位，大端字节序)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;P&lt;/td&gt;
+&lt;td&gt;无符号长长整型(64位，小端字节序)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;f&lt;/td&gt;
+&lt;td&gt;单精度浮点型(机器相关大小)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;d&lt;/td&gt;
+&lt;td&gt;双精度浮点型(机器相关大小)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;x&lt;/td&gt;
+&lt;td&gt;NUL字节&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;X&lt;/td&gt;
+&lt;td&gt;回退一字节&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Z&lt;/td&gt;
+&lt;td&gt;以NUL字节填充字符串空白(new in PHP 5.5)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;@&lt;/td&gt;
+&lt;td&gt;NUL填充到绝对位置&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;这么多参数看下来，我第一次是真心懵逼了，大部分说明都很好理解，但是其中的主机、大端、小端等字节序是什么鬼呢？接下里的内容比较枯燥，但必须理解才行，坚持吧。&lt;/p&gt;
     
     </summary>
     
