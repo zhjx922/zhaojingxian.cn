@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhaojingxian.cn/"/>
-  <updated>2017-03-21T03:46:40.000Z</updated>
+  <updated>2017-03-31T16:20:47.000Z</updated>
   <id>https://zhaojingxian.cn/</id>
   
   <author>
@@ -14,6 +14,47 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>守护进程之PHP实现</title>
+    <link href="https://zhaojingxian.cn/2017/03/31/%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E4%B9%8BPHP%E5%AE%9E%E7%8E%B0/"/>
+    <id>https://zhaojingxian.cn/2017/03/31/守护进程之PHP实现/</id>
+    <published>2017-03-31T15:26:54.000Z</published>
+    <updated>2017-03-31T16:20:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="什么是守护进程"><a href="#什么是守护进程" class="headerlink" title="什么是守护进程"></a>什么是守护进程</h3><p>守护进程(daemon)是一种特殊的进程，它的生命周期很长，它在后台运行并且没有控制终端(这样可以保证守护进程不会接收到各种来自终端的信号)。<br>比如:crontab、sshd、nginx等，都会使用守护进程的形式运行，确保可以一直正常的提供服务。</p>
+<h3 id="如何实现守护进程"><a href="#如何实现守护进程" class="headerlink" title="如何实现守护进程"></a>如何实现守护进程</h3><ul>
+<li>fork子进程，父进程退出(当前子进程会成为init进程的子进程)</li>
+<li>子进程调用setsid()，开启一个新会话，成为新的会话组长，并且释放于终端的关联关系</li>
+<li>再次fork子进程，父进程退出(可以防止会话组长重新申请打开终端)</li>
+<li>关闭打开的文件描述符</li>
+<li>改变当前工作目录chdir</li>
+<li>清除进程的umask</li>
+</ul>
+<h3 id="PHP实现"><a href="#PHP实现" class="headerlink" title="PHP实现"></a>PHP实现</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * daemon(守护进程) PHP实现</div><div class="line"> * <span class="doctag">@author</span> zhjx922</div><div class="line"> */</div><div class="line"></div><div class="line">$pid = pcntl_fork();</div><div class="line"><span class="keyword">if</span> ($pid == <span class="number">-1</span>) &#123;</div><div class="line">    <span class="keyword">die</span>(<span class="string">'创建子进程失败'</span>);</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> ($pid) &#123;</div><div class="line">    <span class="comment">//第一次退出父进程</span></div><div class="line">    <span class="keyword">exit</span>(<span class="number">0</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//setsid</span></div><div class="line">posix_setsid();</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">"成功输出，脱离终端"</span> . PHP_EOL;</div><div class="line">sleep(<span class="number">5</span>);</div><div class="line"></div><div class="line">$pid = pcntl_fork();</div><div class="line"><span class="keyword">if</span> ($pid == <span class="number">-1</span>) &#123;</div><div class="line">    <span class="keyword">die</span>(<span class="string">'创建子进程失败'</span>);</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> ($pid) &#123;</div><div class="line">    <span class="comment">//第二次退出父进程(之前fork出来的子进程)</span></div><div class="line">    <span class="keyword">exit</span>(<span class="number">0</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">"依然可以输出"</span> . PHP_EOL;</div><div class="line">sleep(<span class="number">5</span>);</div><div class="line"></div><div class="line"><span class="comment">//关闭各种描述符</span></div><div class="line">@fclose(STDOUT);</div><div class="line">@fclose(STDERR);</div><div class="line">$STDOUT = fopen(<span class="string">'/dev/null'</span>, <span class="string">"a"</span>);</div><div class="line">$STDERR = fopen(<span class="string">'/dev/null'</span>, <span class="string">"a"</span>);</div><div class="line"></div><div class="line">chdir(<span class="string">'/'</span>);</div><div class="line"></div><div class="line">umask(<span class="number">0</span>);</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">"这里不会输出, ps aux | grep daemon.php 查看进程,20s后退出"</span> . PHP_EOL;</div><div class="line">sleep(<span class="number">20</span>);</div></pre></td></tr></table></figure>
+<h3 id="日常使用已经注意事项"><a href="#日常使用已经注意事项" class="headerlink" title="日常使用已经注意事项"></a>日常使用已经注意事项</h3><ul>
+<li><code>php daemon.php &amp;</code> 这样使用，当关闭终端后，当前php进程也会同时关掉</li>
+<li><code>nohup php daemon.php &gt; daemon.log &amp;</code> 终端关闭后，依然会继续运行</li>
+<li>使用<code>supervisor</code></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;什么是守护进程&quot;&gt;&lt;a href=&quot;#什么是守护进程&quot; class=&quot;headerlink&quot; title=&quot;什么是守护进程&quot;&gt;&lt;/a&gt;什么是守护进程&lt;/h3&gt;&lt;p&gt;守护进程(daemon)是一种特殊的进程，它的生命周期很长，它在后台运行并且没有控制终端(这样可以保
+    
+    </summary>
+    
+      <category term="PHP" scheme="https://zhaojingxian.cn/categories/PHP/"/>
+    
+    
+      <category term="posix" scheme="https://zhaojingxian.cn/tags/posix/"/>
+    
+      <category term="守护进程" scheme="https://zhaojingxian.cn/tags/%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B/"/>
+    
+      <category term="daemon" scheme="https://zhaojingxian.cn/tags/daemon/"/>
+    
+  </entry>
   
   <entry>
     <title>北京小客车摇号程序PHP版</title>

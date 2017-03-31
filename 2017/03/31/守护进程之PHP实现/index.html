@@ -69,7 +69,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="北京,摇号,算法," />
+  <meta name="keywords" content="posix,守护进程,daemon," />
 
 
 
@@ -87,26 +87,25 @@
 
 
 
-<meta name="description" content="相信很多北京本地or北漂一族摇了N年车牌号的人大有人在，作为一个即将加入摇号大军的程序员，带着好奇心查看了一下摇号相关的规则和程序，是否公平公正公开公…
-
-官方信息温馨提示：摇号月的25日，在公证人员的公证下，工作人员按规则为审核通过的编码分配摇号基数序号，形成摇号池编码数据文件，并刻盘封存，将参与26日的摇号。26日摇号结束后，请您注意查询是否中签，中签后凭打印的“小客车配置指标确认通知书”办">
+<meta name="description" content="什么是守护进程守护进程(daemon)是一种特殊的进程，它的生命周期很长，它在后台运行并且没有控制终端(这样可以保证守护进程不会接收到各种来自终端的信号)。比如:crontab、sshd、nginx等，都会使用守护进程的形式运行，确保可以一直正常的提供服务。
+如何实现守护进程
+fork子进程，父进程退出(当前子进程会成为init进程的子进程)
+子进程调用setsid()，开启一个新会话，成为新的会">
 <meta property="og:type" content="article">
-<meta property="og:title" content="北京小客车摇号程序PHP版">
-<meta property="og:url" content="https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/index.html">
+<meta property="og:title" content="守护进程之PHP实现">
+<meta property="og:url" content="https://zhaojingxian.cn/2017/03/31/守护进程之PHP实现/index.html">
 <meta property="og:site_name" content="zhjx922 De Blog">
-<meta property="og:description" content="相信很多北京本地or北漂一族摇了N年车牌号的人大有人在，作为一个即将加入摇号大军的程序员，带着好奇心查看了一下摇号相关的规则和程序，是否公平公正公开公…
-
-官方信息温馨提示：摇号月的25日，在公证人员的公证下，工作人员按规则为审核通过的编码分配摇号基数序号，形成摇号池编码数据文件，并刻盘封存，将参与26日的摇号。26日摇号结束后，请您注意查询是否中签，中签后凭打印的“小客车配置指标确认通知书”办">
-<meta property="og:image" content="https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/yaohaochengxu.jpg">
-<meta property="og:image" content="https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/res.jpg">
-<meta property="og:image" content="https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/yanzheng.jpg">
-<meta property="og:updated_time" content="2017-03-21T03:46:40.000Z">
+<meta property="og:description" content="什么是守护进程守护进程(daemon)是一种特殊的进程，它的生命周期很长，它在后台运行并且没有控制终端(这样可以保证守护进程不会接收到各种来自终端的信号)。比如:crontab、sshd、nginx等，都会使用守护进程的形式运行，确保可以一直正常的提供服务。
+如何实现守护进程
+fork子进程，父进程退出(当前子进程会成为init进程的子进程)
+子进程调用setsid()，开启一个新会话，成为新的会">
+<meta property="og:updated_time" content="2017-03-31T16:20:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="北京小客车摇号程序PHP版">
-<meta name="twitter:description" content="相信很多北京本地or北漂一族摇了N年车牌号的人大有人在，作为一个即将加入摇号大军的程序员，带着好奇心查看了一下摇号相关的规则和程序，是否公平公正公开公…
-
-官方信息温馨提示：摇号月的25日，在公证人员的公证下，工作人员按规则为审核通过的编码分配摇号基数序号，形成摇号池编码数据文件，并刻盘封存，将参与26日的摇号。26日摇号结束后，请您注意查询是否中签，中签后凭打印的“小客车配置指标确认通知书”办">
-<meta name="twitter:image" content="https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/yaohaochengxu.jpg">
+<meta name="twitter:title" content="守护进程之PHP实现">
+<meta name="twitter:description" content="什么是守护进程守护进程(daemon)是一种特殊的进程，它的生命周期很长，它在后台运行并且没有控制终端(这样可以保证守护进程不会接收到各种来自终端的信号)。比如:crontab、sshd、nginx等，都会使用守护进程的形式运行，确保可以一直正常的提供服务。
+如何实现守护进程
+fork子进程，父进程退出(当前子进程会成为init进程的子进程)
+子进程调用setsid()，开启一个新会话，成为新的会">
 
 
 
@@ -134,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/"/>
+  <link rel="canonical" href="https://zhaojingxian.cn/2017/03/31/守护进程之PHP实现/"/>
 
 
 
 
 
-  <title> 北京小客车摇号程序PHP版 | zhjx922 De Blog </title>
+  <title> 守护进程之PHP实现 | zhjx922 De Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -287,7 +286,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/">
+  <link itemprop="mainEntityOfPage" href="https://zhaojingxian.cn/2017/03/31/守护进程之PHP实现/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="zhjx922">
@@ -311,7 +310,7 @@
             
             
               
-                北京小客车摇号程序PHP版
+                守护进程之PHP实现
               
             
           </h2>
@@ -326,8 +325,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-19T23:22:41+08:00">
-                2017-03-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-31T23:26:54+08:00">
+                2017-03-31
               </time>
             
 
@@ -349,8 +348,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
                   </a>
                 </span>
 
@@ -367,8 +366,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/19/北京小客车摇号程序PHP版/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/19/北京小客车摇号程序PHP版/" itemprop="commentCount"></span>
+                <a href="/2017/03/31/守护进程之PHP实现/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/31/守护进程之PHP实现/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -394,31 +393,21 @@
       
 
       
-        <blockquote>
-<p>相信很多北京本地or北漂一族摇了N年车牌号的人大有人在，作为一个即将加入摇号大军的程序员，带着好奇心查看了一下摇号相关的规则和程序，是否公平公正公开公…</p>
-</blockquote>
-<h3 id="官方信息"><a href="#官方信息" class="headerlink" title="官方信息"></a>官方信息</h3><p>温馨提示：摇号月的25日，在公证人员的公证下，工作人员按规则为审核通过的编码分配摇号基数序号，形成摇号池编码数据文件，并刻盘封存，将参与26日的摇号。26日摇号结束后，请您注意查询是否中签，中签后凭打印的“小客车配置指标确认通知书”办理购车手续。<br>特别说明：<br>1、摇号基数序号分配方法：首先，将当期所有审核通过的编码按从小到大的顺序分配序号；然后，第二阶梯及以上的编码按从小到大的顺序，接在后面继续分配序号；再然后，第三阶梯及以上的编码按从小到大的顺序，接在后面继续分配序号；以此类推。因此，高阶梯的编码所对应的多个摇号基数序号是不连号的，当期摇号基数序号总数=第一阶梯人数+第二阶梯人数×2+第三阶梯人数×3……<br>2、摇号方法：摇号程序从当期所有摇号基数序号中随机抽取中签者，高阶梯的编码对应多个摇号基数序号，于是享受了多倍的中签概率。摇号程序确保高阶梯编码的多个摇号基数序号最多只能摇中一个，当其中一个摇号基数序号中签，该编码即中签。</p>
-<h3 id="解读"><a href="#解读" class="headerlink" title="解读"></a>解读</h3><p>1、摇号月的25日会将所有摇号的数据存放到数据文件(一个csv文件集合的压缩包，后面会提到，这个是我们写摇号程序的关键数据)<br>2、摇号月的26日会摇出一个6位的随机数(这个是用来计算中签的关键)<br>3、第几阶梯就会为对应阶梯的人分配几个摇号基础序号，比如A现在是第三阶梯，B是第二阶梯，C是第一阶梯，那么对应的排序就为<strong><em>ABCABA(123456)</em></strong></p>
-<h3 id="官方摇号程序"><a href="#官方摇号程序" class="headerlink" title="官方摇号程序"></a>官方摇号程序</h3><p>为了公平公正，官方提供了可执行的摇号程序，已经对应摇号期数的摇号数据提供了下载。</p>
-<p><img src="/2017/03/19/北京小客车摇号程序PHP版/yaohaochengxu.jpg" alt="摇号程序"></p>
-<p>温馨提示了我们<code>Windows7操作系统，系统应当安装有.NET Framework 2.0</code>，既然是.NET，那我们就反编译一下，看看到底是怎么计算的~</p>
-<a id="more"></a>
-<h3 id="反编译"><a href="#反编译" class="headerlink" title="反编译"></a>反编译</h3><p>使用反编译工具<code>ILSPY</code>，直接搞定，我们会发现源程序是C#写的，关键代码放在<code>AllRandomPick.cs</code>中，其中最关键的两句为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Random random = new Random(allRandomPickData.Seed);</div><div class="line">pickNumber = random.Next(allRandomPickData.TotalNumber);</div></pre></td></tr></table></figure></p>
-<p>Random为C#自带的随机函数<br>allRandomPickData.Seed 表示6位随机种子数<br>allRandomPickData.TotalNumber 表示摇号池编码数</p>
-<p>这么看来，如果确保随机种子数是随机的话，这个算法可以认为是”绝对”公平的。<br>如果作弊的话，一是控制随机种子数，二是伪造摇号编码插入到对应的位置。<br>从此看来，大家还是乖乖摇号或者买新能源吧。。。</p>
-<h3 id="提取C-随机数类"><a href="#提取C-随机数类" class="headerlink" title="提取C#随机数类"></a>提取C#随机数类</h3><p>官方虽然提供了C#版的摇号程序，但是作为世界上最好的语言PHP怎能不尝试一下呢？</p>
-<p>从之前的文章 <a href="https://zhaojingxian.cn/2017/03/13/%E8%87%AA%E5%B7%B1%E5%AE%9E%E7%8E%B0%E9%9A%8F%E6%9C%BA%E6%95%B0/">自己实现随机数</a>，我们不难发现，如果随机种子的固定的话，那么我们产生的随机数也是固定的。</p>
-<p>但是不同语言的随机数实现方法是不同的，我们要向实现C#版的random，就必须知道C#纠结是如何生成随机数的。</p>
-<p>感谢微软开源(不开源的话，可能没法用PHP实现了)，让我轻松的找到了对应的实现方法 <a href="https://github.com/dotnet/coreclr/blob/32f0f9721afb584b4a14d69135bea7ddc129f755/src/mscorlib/src/System/Random.cs" target="_blank" rel="external">https://github.com/dotnet/coreclr/blob/32f0f9721afb584b4a14d69135bea7ddc129f755/src/mscorlib/src/System/Random.cs</a></p>
-<p>既然已经有了源代码，我们只要将C#翻译成PHP就可以了。</p>
-<h3 id="分析压缩包"><a href="#分析压缩包" class="headerlink" title="分析压缩包"></a>分析压缩包</h3><p>官方提供了每期的压缩包，我们解压之后，能够看到一堆的文件列表，随便打开一个A列代表了当前的基础序号，B列代表了对应的摇号编码，如果随机到的基础序号对应的是你的编码，那么，就该恭喜你了。</p>
-<h3 id="PHP实现"><a href="#PHP实现" class="headerlink" title="PHP实现"></a>PHP实现</h3><p>随机类有了，只要使用随机种子初始化随机类，然后在总编码数范围内随机，next…next…直到全部指标分配完就可以了，代码我放到了 <a href="https://github.com/zhjx922/yaohao" target="_blank" rel="external">github</a> 上，有兴趣的小伙伴可以阅读原文查看。</p>
-<p>再放个最终的运行结果：</p>
-<p><img src="/2017/03/19/北京小客车摇号程序PHP版/res.jpg" alt="摇号程序"></p>
-<p>到官网上验证一下：</p>
-<p><img src="/2017/03/19/北京小客车摇号程序PHP版/yanzheng.jpg" alt="摇号程序"></p>
-<h3 id="摇号越久就越容易中么？"><a href="#摇号越久就越容易中么？" class="headerlink" title="摇号越久就越容易中么？"></a>摇号越久就越容易中么？</h3><p>不是，虽然你的倍数一直在增加，但是和你一起摇的人的倍数也在增加，后面加入的人也越来越多，毕竟指标数在变得越来越少。</p>
-<h3 id="真的没办法提高概率了么？"><a href="#真的没办法提高概率了么？" class="headerlink" title="真的没办法提高概率了么？"></a>真的没办法提高概率了么？</h3><p>有，比如下方二维码试试</p>
+        <h3 id="什么是守护进程"><a href="#什么是守护进程" class="headerlink" title="什么是守护进程"></a>什么是守护进程</h3><p>守护进程(daemon)是一种特殊的进程，它的生命周期很长，它在后台运行并且没有控制终端(这样可以保证守护进程不会接收到各种来自终端的信号)。<br>比如:crontab、sshd、nginx等，都会使用守护进程的形式运行，确保可以一直正常的提供服务。</p>
+<h3 id="如何实现守护进程"><a href="#如何实现守护进程" class="headerlink" title="如何实现守护进程"></a>如何实现守护进程</h3><ul>
+<li>fork子进程，父进程退出(当前子进程会成为init进程的子进程)</li>
+<li>子进程调用setsid()，开启一个新会话，成为新的会话组长，并且释放于终端的关联关系</li>
+<li>再次fork子进程，父进程退出(可以防止会话组长重新申请打开终端)</li>
+<li>关闭打开的文件描述符</li>
+<li>改变当前工作目录chdir</li>
+<li>清除进程的umask</li>
+</ul>
+<h3 id="PHP实现"><a href="#PHP实现" class="headerlink" title="PHP实现"></a>PHP实现</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * daemon(守护进程) PHP实现</div><div class="line"> * <span class="doctag">@author</span> zhjx922</div><div class="line"> */</div><div class="line"></div><div class="line">$pid = pcntl_fork();</div><div class="line"><span class="keyword">if</span> ($pid == <span class="number">-1</span>) &#123;</div><div class="line">    <span class="keyword">die</span>(<span class="string">'创建子进程失败'</span>);</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> ($pid) &#123;</div><div class="line">    <span class="comment">//第一次退出父进程</span></div><div class="line">    <span class="keyword">exit</span>(<span class="number">0</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//setsid</span></div><div class="line">posix_setsid();</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">"成功输出，脱离终端"</span> . PHP_EOL;</div><div class="line">sleep(<span class="number">5</span>);</div><div class="line"></div><div class="line">$pid = pcntl_fork();</div><div class="line"><span class="keyword">if</span> ($pid == <span class="number">-1</span>) &#123;</div><div class="line">    <span class="keyword">die</span>(<span class="string">'创建子进程失败'</span>);</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> ($pid) &#123;</div><div class="line">    <span class="comment">//第二次退出父进程(之前fork出来的子进程)</span></div><div class="line">    <span class="keyword">exit</span>(<span class="number">0</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">"依然可以输出"</span> . PHP_EOL;</div><div class="line">sleep(<span class="number">5</span>);</div><div class="line"></div><div class="line"><span class="comment">//关闭各种描述符</span></div><div class="line">@fclose(STDOUT);</div><div class="line">@fclose(STDERR);</div><div class="line">$STDOUT = fopen(<span class="string">'/dev/null'</span>, <span class="string">"a"</span>);</div><div class="line">$STDERR = fopen(<span class="string">'/dev/null'</span>, <span class="string">"a"</span>);</div><div class="line"></div><div class="line">chdir(<span class="string">'/'</span>);</div><div class="line"></div><div class="line">umask(<span class="number">0</span>);</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">"这里不会输出, ps aux | grep daemon.php 查看进程,20s后退出"</span> . PHP_EOL;</div><div class="line">sleep(<span class="number">20</span>);</div></pre></td></tr></table></figure>
+<h3 id="日常使用已经注意事项"><a href="#日常使用已经注意事项" class="headerlink" title="日常使用已经注意事项"></a>日常使用已经注意事项</h3><ul>
+<li><code>php daemon.php &amp;</code> 这样使用，当关闭终端后，当前php进程也会同时关掉</li>
+<li><code>nohup php daemon.php &gt; daemon.log &amp;</code> 终端关闭后，依然会继续运行</li>
+<li>使用<code>supervisor</code></li>
+</ul>
 
       
     </div>
@@ -446,11 +435,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/北京/" rel="tag"># 北京</a>
+            <a href="/tags/posix/" rel="tag"># posix</a>
           
-            <a href="/tags/摇号/" rel="tag"># 摇号</a>
+            <a href="/tags/守护进程/" rel="tag"># 守护进程</a>
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/daemon/" rel="tag"># daemon</a>
           
         </div>
       
@@ -474,8 +463,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/14/超简单的PHP验证码识别/" rel="next" title="超简单的PHP验证码识别">
-                <i class="fa fa-chevron-left"></i> 超简单的PHP验证码识别
+              <a href="/2017/03/19/北京小客车摇号程序PHP版/" rel="next" title="北京小客车摇号程序PHP版">
+                <i class="fa fa-chevron-left"></i> 北京小客车摇号程序PHP版
               </a>
             
           </div>
@@ -483,10 +472,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/31/守护进程之PHP实现/" rel="prev" title="守护进程之PHP实现">
-                守护进程之PHP实现 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -512,8 +497,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/19/北京小客车摇号程序PHP版/"
-           data-title="北京小客车摇号程序PHP版" data-url="https://zhaojingxian.cn/2017/03/19/北京小客车摇号程序PHP版/">
+      <div class="ds-thread" data-thread-key="2017/03/31/守护进程之PHP实现/"
+           data-title="守护进程之PHP实现" data-url="https://zhaojingxian.cn/2017/03/31/守护进程之PHP实现/">
       </div>
     
   </div>
@@ -662,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#官方信息"><span class="nav-number">1.</span> <span class="nav-text">官方信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解读"><span class="nav-number">2.</span> <span class="nav-text">解读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#官方摇号程序"><span class="nav-number">3.</span> <span class="nav-text">官方摇号程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反编译"><span class="nav-number">4.</span> <span class="nav-text">反编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提取C-随机数类"><span class="nav-number">5.</span> <span class="nav-text">提取C#随机数类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析压缩包"><span class="nav-number">6.</span> <span class="nav-text">分析压缩包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP实现"><span class="nav-number">7.</span> <span class="nav-text">PHP实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#摇号越久就越容易中么？"><span class="nav-number">8.</span> <span class="nav-text">摇号越久就越容易中么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#真的没办法提高概率了么？"><span class="nav-number">9.</span> <span class="nav-text">真的没办法提高概率了么？</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是守护进程"><span class="nav-number">1.</span> <span class="nav-text">什么是守护进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何实现守护进程"><span class="nav-number">2.</span> <span class="nav-text">如何实现守护进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP实现"><span class="nav-number">3.</span> <span class="nav-text">PHP实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日常使用已经注意事项"><span class="nav-number">4.</span> <span class="nav-text">日常使用已经注意事项</span></a></li></ol></div>
             
 
           </div>
