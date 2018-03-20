@@ -278,6 +278,204 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://zhaojingxian.cn/2018/03/20/微信公众号-服务号-开发注意事项/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="zhjx922">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/3774194?v=3&s=460">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="zhjx922 De Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="zhjx922 De Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/03/20/微信公众号-服务号-开发注意事项/" itemprop="url">
+                  微信公众号(服务号)开发注意事项
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-20T22:07:03+08:00">
+                2018-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/微信公众号/" itemprop="url" rel="index">
+                    <span itemprop="name">微信公众号</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/20/微信公众号-服务号-开发注意事项/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/20/微信公众号-服务号-开发注意事项/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>微信公众号(服务号)已经推出很久了，但是第一次接触的人，或多或少会走一些弯路，下面是我在开发中见到的一些问题，也给自己做个备份</p>
+</blockquote>
+<h3 id="万事开头难"><a href="#万事开头难" class="headerlink" title="万事开头难"></a>万事开头难</h3><p>其实只要是针对第三方平台的开发，第一件要做的事儿不是开干，而是先了解它。</p>
+<ul>
+<li>官方文档先读一遍(了解它再征服它~) <a href="https://mp.weixin.qq.com/wiki" target="_blank" rel="external">https://mp.weixin.qq.com/wiki</a></li>
+<li>准备一个已备案的域名和一个外网服务器，家里有些宽带有外网IP，不过80端口都被封了，但是443是可以用的~</li>
+<li>微信测试号，不需要线上申请号，扫描二维码直接登录，页面略丑 <a href="https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login" target="_blank" rel="external">https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login</a></li>
+<li>在线调试用具 <a href="https://mp.weixin.qq.com/debug/cgi-bin/apiinfo" target="_blank" rel="external">https://mp.weixin.qq.com/debug/cgi-bin/apiinfo</a></li>
+<li>本地开发工具(公众号&amp;小程序) <a href="https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/devtools.html" target="_blank" rel="external">https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/devtools.html</a></li>
+</ul>
+<h3 id="一些功能点的使用场景"><a href="#一些功能点的使用场景" class="headerlink" title="一些功能点的使用场景"></a>一些功能点的使用场景</h3><h4 id="带参数的二维码"><a href="#带参数的二维码" class="headerlink" title="带参数的二维码"></a>带参数的二维码</h4><p>如果要对一些活动的二维码做标记(来源、场景、关注绑定等)，关注\扫描该二维码服务端会同时收到二维码中携带的参数。</p>
+<h4 id="个性化菜单"><a href="#个性化菜单" class="headerlink" title="个性化菜单"></a>个性化菜单</h4><p>可用根据用户的属性(标签、性别、手机系统、地区、语言)显示不同的菜单，可以和带参数的二维码结合使用。</p>
+<h4 id="客服消息"><a href="#客服消息" class="headerlink" title="客服消息"></a>客服消息</h4><p>当用户主动和公众号有一些交互(发信息、点击菜单、关注公众号等)时，在48小时内，可以主动给用户推送消息。</p>
+<h4 id="JS-SDK"><a href="#JS-SDK" class="headerlink" title="JS-SDK"></a>JS-SDK</h4><p>只要是在微信里面传播的页面，绝对离不开微信提供的强大的SDK功能，支持：分享内容自定义、图像能力(拍照、选图等)、音频能力(录音、播放等)，具体的功能自己挖掘。</p>
+<h3 id="遇到过的一些问题"><a href="#遇到过的一些问题" class="headerlink" title="遇到过的一些问题"></a>遇到过的一些问题</h3><ul>
+<li>测试环境：必须关注测试服务号，否则你会碰到各种异常问题不能自拔。</li>
+<li>测试环境：模板数量有限制，最多10条，多了就得删。</li>
+<li>测试环境：appID和生产环境要区分开，不要混淆(当然，这个和mysql等配置同理)。</li>
+<li>测试环境：不要使用生产环境的appID生成access_token(生产环境的token会失效，导致错误)</li>
+<li>测试环境：只支持配置一个js安全域名(线上是3个)。</li>
+<li>测试环境：授权回调页面域名隐藏在体验接口权限表中，仔细找。</li>
+<li>接收到微信的所有请求必须正常回复(输出一个success或者空)，否则微信会认为处理失败，重试N次。</li>
+<li>access_token放到分布式cache中，不要等失效，通过定时脚本在过期前更新。</li>
+<li>区分清楚ToUserName和FromUserName，to是你，from是用户(用户的open_id)~</li>
+<li>调用js-sdk必须配置js安全域名。</li>
+<li>用户授权分两种，隐式和显式。隐式：只能获取到用户open_id，如果不关注公众号，不能获取用户信息。显式：只要用户点击确定，就可以获取用户昵称等信息。</li>
+<li>调用所有js-sdk都必须通过接口获取签名数据(每次调用都需要：比如动态更改了分享标题等)</li>
+<li>前端页面使用vue.js类框架时，全部通过api获取数据，js-sdk签名中的url需要通过<code>$_SERVER[&#39;HTTP_REFERER&#39;]</code>获取，而不是<code>$_SERVER[&#39;HTTP_HOST&#39;].$_SERVER[&#39;REQUEST_URI&#39;]</code>。</li>
+<li>带参数的二维码分为永久和临时两种，永久的数量有限，临时的数量相对较多。比如和单个用户属性相关的二维码使用临时的二维码优先。</li>
+<li>通过js-sdk上传的素材(音频、图片等)，微信先会给一个media_id(通常有效期为3天)，当我们使用的时候通过media_id下载下来。</li>
+<li>模板消息，推送次数超多，但是必须使用模板库的一些固定格式内容，自己申请成功率极低。</li>
+<li>页面启用https后，页面的资源也必须使用https，当然这个不止微信里面是这样。</li>
+</ul>
+<h3 id="不是总结的总结"><a href="#不是总结的总结" class="headerlink" title="不是总结的总结"></a>不是总结的总结</h3><p>工欲善其事必先利其器，无论做什么，学什么，都得先把它的文档看一遍，工具安装一个。直接上手整，一脸懵逼浪费时间不说，活儿能不能干好都是个问题。</p>
+<p>大家还遇到过什么问题或者坑，欢迎留言分享~</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+  		<div>
+  		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  		<!-- test -->
+  		<ins class="adsbygoogle"
+  	    	style="display:block"
+  	     	data-ad-client="ca-pub-4751228138087748"
+  	     	data-ad-slot="5445374794"
+  	     	data-ad-format="auto"></ins>
+  		<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  		</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="https://zhaojingxian.cn/2017/06/29/本地调试微信之内网穿透/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1918,219 +2116,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://zhaojingxian.cn/2017/02/15/正确认识浮点数/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="zhjx922">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/3774194?v=3&s=460">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="zhjx922 De Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="zhjx922 De Blog" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/15/正确认识浮点数/" itemprop="url">
-                  正确认识浮点数
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-15T00:26:04+08:00">
-                2017-02-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机原理/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机原理</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/02/15/正确认识浮点数/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/15/正确认识浮点数/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>大家在日常开发中，必然使用过浮点数，也会发现浮点数不是精确的，那究竟是什么原因造成的呢？</p>
-</blockquote>
-<h3 id="奇怪的结果"><a href="#奇怪的结果" class="headerlink" title="奇怪的结果"></a>奇怪的结果</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var_dump((<span class="number">1</span><span class="number">-0.9</span>) == <span class="number">0.1</span>);</div><div class="line"><span class="comment">//输出:bool(false)</span></div></pre></td></tr></table></figure>
-<p>很奇怪吧！1-0.9怎么能不等于0.1呢？这是为什么呢？这要从浮点数的储存标准开始说。</p>
-<h3 id="IEEE-754"><a href="#IEEE-754" class="headerlink" title="IEEE 754"></a>IEEE 754</h3><p>浮点数在计算机中是根据<code>IEEE 754</code>(二进制浮点数算数标准)储存的。<br>计算公式为: (-1)^S x M x 2^E</p>
-<p>32位单精度储存结构(对应占位)</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">符号(S)</th>
-<th style="text-align:center">阶码(E)</th>
-<th style="text-align:center">尾数(M)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">23</td>
-</tr>
-</tbody>
-</table>
-<p>64位双精度储存结构(对应占位)</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">符号(S)</th>
-<th style="text-align:center">阶码(E)</th>
-<th style="text-align:center">尾数(M)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">11</td>
-<td style="text-align:center">52</td>
-</tr>
-</tbody>
-</table>
-<p>解释:</p>
-<ul>
-<li>S: 符号(0正，1负)</li>
-<li>E: 阶码(指数)</li>
-<li>M: 尾数(二进制小数,数字的实体部分)</li>
-</ul>
-<p>M(尾数)和E(阶码)不同情况需要分别对待</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/15/正确认识浮点数/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-  		<div>
-  		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  		<!-- test -->
-  		<ins class="adsbygoogle"
-  	    	style="display:block"
-  	     	data-ad-client="ca-pub-4751228138087748"
-  	     	data-ad-slot="5445374794"
-  	     	data-ad-format="auto"></ins>
-  		<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  		</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2178,7 +2163,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2187,7 +2172,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2196,7 +2181,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2284,8 +2269,8 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -69,7 +69,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="posix,守护进程,daemon," />
+  <meta name="keywords" content="微信,公众号,服务号," />
 
 
 
@@ -87,25 +87,31 @@
 
 
 
-<meta name="description" content="什么是守护进程守护进程(daemon)是一种特殊的进程，它的生命周期很长，它在后台运行并且没有控制终端(这样可以保证守护进程不会接收到各种来自终端的信号)。比如:crontab、sshd、nginx等，都会使用守护进程的形式运行，确保可以一直正常的提供服务。
-如何实现守护进程
-fork子进程，父进程退出(当前子进程会成为init进程的子进程)
-子进程调用setsid()，开启一个新会话，成为新的会">
+<meta name="description" content="微信公众号(服务号)已经推出很久了，但是第一次接触的人，或多或少会走一些弯路，下面是我在开发中见到的一些问题，也给自己做个备份
+
+万事开头难其实只要是针对第三方平台的开发，第一件要做的事儿不是开干，而是先了解它。
+
+官方文档先读一遍(了解它再征服它~) https://mp.weixin.qq.com/wiki
+准备一个已备案的域名和一个外网服务器，家里有些宽带有外网IP，不过80端口都被封了，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="守护进程之PHP实现">
-<meta property="og:url" content="https://zhaojingxian.cn/2017/03/31/守护进程之PHP实现/index.html">
+<meta property="og:title" content="微信公众号(服务号)开发注意事项">
+<meta property="og:url" content="https://zhaojingxian.cn/2018/03/20/微信公众号-服务号-开发注意事项/index.html">
 <meta property="og:site_name" content="zhjx922 De Blog">
-<meta property="og:description" content="什么是守护进程守护进程(daemon)是一种特殊的进程，它的生命周期很长，它在后台运行并且没有控制终端(这样可以保证守护进程不会接收到各种来自终端的信号)。比如:crontab、sshd、nginx等，都会使用守护进程的形式运行，确保可以一直正常的提供服务。
-如何实现守护进程
-fork子进程，父进程退出(当前子进程会成为init进程的子进程)
-子进程调用setsid()，开启一个新会话，成为新的会">
-<meta property="og:updated_time" content="2017-03-31T16:20:47.000Z">
+<meta property="og:description" content="微信公众号(服务号)已经推出很久了，但是第一次接触的人，或多或少会走一些弯路，下面是我在开发中见到的一些问题，也给自己做个备份
+
+万事开头难其实只要是针对第三方平台的开发，第一件要做的事儿不是开干，而是先了解它。
+
+官方文档先读一遍(了解它再征服它~) https://mp.weixin.qq.com/wiki
+准备一个已备案的域名和一个外网服务器，家里有些宽带有外网IP，不过80端口都被封了，">
+<meta property="og:updated_time" content="2018-03-20T15:27:04.339Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="守护进程之PHP实现">
-<meta name="twitter:description" content="什么是守护进程守护进程(daemon)是一种特殊的进程，它的生命周期很长，它在后台运行并且没有控制终端(这样可以保证守护进程不会接收到各种来自终端的信号)。比如:crontab、sshd、nginx等，都会使用守护进程的形式运行，确保可以一直正常的提供服务。
-如何实现守护进程
-fork子进程，父进程退出(当前子进程会成为init进程的子进程)
-子进程调用setsid()，开启一个新会话，成为新的会">
+<meta name="twitter:title" content="微信公众号(服务号)开发注意事项">
+<meta name="twitter:description" content="微信公众号(服务号)已经推出很久了，但是第一次接触的人，或多或少会走一些弯路，下面是我在开发中见到的一些问题，也给自己做个备份
+
+万事开头难其实只要是针对第三方平台的开发，第一件要做的事儿不是开干，而是先了解它。
+
+官方文档先读一遍(了解它再征服它~) https://mp.weixin.qq.com/wiki
+准备一个已备案的域名和一个外网服务器，家里有些宽带有外网IP，不过80端口都被封了，">
 
 
 
@@ -133,13 +139,13 @@ fork子进程，父进程退出(当前子进程会成为init进程的子进程)
 
 
 
-  <link rel="canonical" href="https://zhaojingxian.cn/2017/03/31/守护进程之PHP实现/"/>
+  <link rel="canonical" href="https://zhaojingxian.cn/2018/03/20/微信公众号-服务号-开发注意事项/"/>
 
 
 
 
 
-  <title> 守护进程之PHP实现 | zhjx922 De Blog </title>
+  <title> 微信公众号(服务号)开发注意事项 | zhjx922 De Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -286,7 +292,7 @@ fork子进程，父进程退出(当前子进程会成为init进程的子进程)
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://zhaojingxian.cn/2017/03/31/守护进程之PHP实现/">
+  <link itemprop="mainEntityOfPage" href="https://zhaojingxian.cn/2018/03/20/微信公众号-服务号-开发注意事项/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="zhjx922">
@@ -310,7 +316,7 @@ fork子进程，父进程退出(当前子进程会成为init进程的子进程)
             
             
               
-                守护进程之PHP实现
+                微信公众号(服务号)开发注意事项
               
             
           </h2>
@@ -325,8 +331,8 @@ fork子进程，父进程退出(当前子进程会成为init进程的子进程)
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-31T23:26:54+08:00">
-                2017-03-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-20T22:07:03+08:00">
+                2018-03-20
               </time>
             
 
@@ -348,8 +354,8 @@ fork子进程，父进程退出(当前子进程会成为init进程的子进程)
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
+                  <a href="/categories/微信公众号/" itemprop="url" rel="index">
+                    <span itemprop="name">微信公众号</span>
                   </a>
                 </span>
 
@@ -366,8 +372,8 @@ fork子进程，父进程退出(当前子进程会成为init进程的子进程)
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/31/守护进程之PHP实现/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/31/守护进程之PHP实现/" itemprop="commentCount"></span>
+                <a href="/2018/03/20/微信公众号-服务号-开发注意事项/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/20/微信公众号-服务号-开发注意事项/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -393,21 +399,42 @@ fork子进程，父进程退出(当前子进程会成为init进程的子进程)
       
 
       
-        <h3 id="什么是守护进程"><a href="#什么是守护进程" class="headerlink" title="什么是守护进程"></a>什么是守护进程</h3><p>守护进程(daemon)是一种特殊的进程，它的生命周期很长，它在后台运行并且没有控制终端(这样可以保证守护进程不会接收到各种来自终端的信号)。<br>比如:crontab、sshd、nginx等，都会使用守护进程的形式运行，确保可以一直正常的提供服务。</p>
-<h3 id="如何实现守护进程"><a href="#如何实现守护进程" class="headerlink" title="如何实现守护进程"></a>如何实现守护进程</h3><ul>
-<li>fork子进程，父进程退出(当前子进程会成为init进程的子进程)</li>
-<li>子进程调用setsid()，开启一个新会话，成为新的会话组长，并且释放于终端的关联关系</li>
-<li>再次fork子进程，父进程退出(可以防止会话组长重新申请打开终端)</li>
-<li>关闭打开的文件描述符</li>
-<li>改变当前工作目录chdir</li>
-<li>清除进程的umask</li>
+        <blockquote>
+<p>微信公众号(服务号)已经推出很久了，但是第一次接触的人，或多或少会走一些弯路，下面是我在开发中见到的一些问题，也给自己做个备份</p>
+</blockquote>
+<h3 id="万事开头难"><a href="#万事开头难" class="headerlink" title="万事开头难"></a>万事开头难</h3><p>其实只要是针对第三方平台的开发，第一件要做的事儿不是开干，而是先了解它。</p>
+<ul>
+<li>官方文档先读一遍(了解它再征服它~) <a href="https://mp.weixin.qq.com/wiki" target="_blank" rel="external">https://mp.weixin.qq.com/wiki</a></li>
+<li>准备一个已备案的域名和一个外网服务器，家里有些宽带有外网IP，不过80端口都被封了，但是443是可以用的~</li>
+<li>微信测试号，不需要线上申请号，扫描二维码直接登录，页面略丑 <a href="https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login" target="_blank" rel="external">https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login</a></li>
+<li>在线调试用具 <a href="https://mp.weixin.qq.com/debug/cgi-bin/apiinfo" target="_blank" rel="external">https://mp.weixin.qq.com/debug/cgi-bin/apiinfo</a></li>
+<li>本地开发工具(公众号&amp;小程序) <a href="https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/devtools.html" target="_blank" rel="external">https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/devtools.html</a></li>
 </ul>
-<h3 id="PHP实现"><a href="#PHP实现" class="headerlink" title="PHP实现"></a>PHP实现</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * daemon(守护进程) PHP实现</div><div class="line"> * <span class="doctag">@author</span> zhjx922</div><div class="line"> */</div><div class="line"></div><div class="line">$pid = pcntl_fork();</div><div class="line"><span class="keyword">if</span> ($pid == <span class="number">-1</span>) &#123;</div><div class="line">    <span class="keyword">die</span>(<span class="string">'创建子进程失败'</span>);</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> ($pid) &#123;</div><div class="line">    <span class="comment">//第一次退出父进程</span></div><div class="line">    <span class="keyword">exit</span>(<span class="number">0</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//setsid</span></div><div class="line">posix_setsid();</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">"成功输出，脱离终端"</span> . PHP_EOL;</div><div class="line">sleep(<span class="number">5</span>);</div><div class="line"></div><div class="line">$pid = pcntl_fork();</div><div class="line"><span class="keyword">if</span> ($pid == <span class="number">-1</span>) &#123;</div><div class="line">    <span class="keyword">die</span>(<span class="string">'创建子进程失败'</span>);</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> ($pid) &#123;</div><div class="line">    <span class="comment">//第二次退出父进程(之前fork出来的子进程)</span></div><div class="line">    <span class="keyword">exit</span>(<span class="number">0</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">"依然可以输出"</span> . PHP_EOL;</div><div class="line">sleep(<span class="number">5</span>);</div><div class="line"></div><div class="line"><span class="comment">//关闭各种描述符</span></div><div class="line">@fclose(STDOUT);</div><div class="line">@fclose(STDERR);</div><div class="line">$STDOUT = fopen(<span class="string">'/dev/null'</span>, <span class="string">"a"</span>);</div><div class="line">$STDERR = fopen(<span class="string">'/dev/null'</span>, <span class="string">"a"</span>);</div><div class="line"></div><div class="line">chdir(<span class="string">'/'</span>);</div><div class="line"></div><div class="line">umask(<span class="number">0</span>);</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">"这里不会输出, ps aux | grep daemon.php 查看进程,20s后退出"</span> . PHP_EOL;</div><div class="line">sleep(<span class="number">20</span>);</div></pre></td></tr></table></figure>
-<h3 id="日常使用已经注意事项"><a href="#日常使用已经注意事项" class="headerlink" title="日常使用已经注意事项"></a>日常使用已经注意事项</h3><ul>
-<li><code>php daemon.php &amp;</code> 这样使用，当关闭终端后，当前php进程也会同时关掉</li>
-<li><code>nohup php daemon.php &gt; daemon.log &amp;</code> 终端关闭后，依然会继续运行</li>
-<li>使用<code>supervisor</code></li>
+<h3 id="一些功能点的使用场景"><a href="#一些功能点的使用场景" class="headerlink" title="一些功能点的使用场景"></a>一些功能点的使用场景</h3><h4 id="带参数的二维码"><a href="#带参数的二维码" class="headerlink" title="带参数的二维码"></a>带参数的二维码</h4><p>如果要对一些活动的二维码做标记(来源、场景、关注绑定等)，关注\扫描该二维码服务端会同时收到二维码中携带的参数。</p>
+<h4 id="个性化菜单"><a href="#个性化菜单" class="headerlink" title="个性化菜单"></a>个性化菜单</h4><p>可用根据用户的属性(标签、性别、手机系统、地区、语言)显示不同的菜单，可以和带参数的二维码结合使用。</p>
+<h4 id="客服消息"><a href="#客服消息" class="headerlink" title="客服消息"></a>客服消息</h4><p>当用户主动和公众号有一些交互(发信息、点击菜单、关注公众号等)时，在48小时内，可以主动给用户推送消息。</p>
+<h4 id="JS-SDK"><a href="#JS-SDK" class="headerlink" title="JS-SDK"></a>JS-SDK</h4><p>只要是在微信里面传播的页面，绝对离不开微信提供的强大的SDK功能，支持：分享内容自定义、图像能力(拍照、选图等)、音频能力(录音、播放等)，具体的功能自己挖掘。</p>
+<h3 id="遇到过的一些问题"><a href="#遇到过的一些问题" class="headerlink" title="遇到过的一些问题"></a>遇到过的一些问题</h3><ul>
+<li>测试环境：必须关注测试服务号，否则你会碰到各种异常问题不能自拔。</li>
+<li>测试环境：模板数量有限制，最多10条，多了就得删。</li>
+<li>测试环境：appID和生产环境要区分开，不要混淆(当然，这个和mysql等配置同理)。</li>
+<li>测试环境：不要使用生产环境的appID生成access_token(生产环境的token会失效，导致错误)</li>
+<li>测试环境：只支持配置一个js安全域名(线上是3个)。</li>
+<li>测试环境：授权回调页面域名隐藏在体验接口权限表中，仔细找。</li>
+<li>接收到微信的所有请求必须正常回复(输出一个success或者空)，否则微信会认为处理失败，重试N次。</li>
+<li>access_token放到分布式cache中，不要等失效，通过定时脚本在过期前更新。</li>
+<li>区分清楚ToUserName和FromUserName，to是你，from是用户(用户的open_id)~</li>
+<li>调用js-sdk必须配置js安全域名。</li>
+<li>用户授权分两种，隐式和显式。隐式：只能获取到用户open_id，如果不关注公众号，不能获取用户信息。显式：只要用户点击确定，就可以获取用户昵称等信息。</li>
+<li>调用所有js-sdk都必须通过接口获取签名数据(每次调用都需要：比如动态更改了分享标题等)</li>
+<li>前端页面使用vue.js类框架时，全部通过api获取数据，js-sdk签名中的url需要通过<code>$_SERVER[&#39;HTTP_REFERER&#39;]</code>获取，而不是<code>$_SERVER[&#39;HTTP_HOST&#39;].$_SERVER[&#39;REQUEST_URI&#39;]</code>。</li>
+<li>带参数的二维码分为永久和临时两种，永久的数量有限，临时的数量相对较多。比如和单个用户属性相关的二维码使用临时的二维码优先。</li>
+<li>通过js-sdk上传的素材(音频、图片等)，微信先会给一个media_id(通常有效期为3天)，当我们使用的时候通过media_id下载下来。</li>
+<li>模板消息，推送次数超多，但是必须使用模板库的一些固定格式内容，自己申请成功率极低。</li>
+<li>页面启用https后，页面的资源也必须使用https，当然这个不止微信里面是这样。</li>
 </ul>
+<h3 id="不是总结的总结"><a href="#不是总结的总结" class="headerlink" title="不是总结的总结"></a>不是总结的总结</h3><p>工欲善其事必先利其器，无论做什么，学什么，都得先把它的文档看一遍，工具安装一个。直接上手整，一脸懵逼浪费时间不说，活儿能不能干好都是个问题。</p>
+<p>大家还遇到过什么问题或者坑，欢迎留言分享~</p>
 
       
     </div>
@@ -435,11 +462,11 @@ fork子进程，父进程退出(当前子进程会成为init进程的子进程)
       
         <div class="post-tags">
           
-            <a href="/tags/posix/" rel="tag"># posix</a>
+            <a href="/tags/微信/" rel="tag"># 微信</a>
           
-            <a href="/tags/守护进程/" rel="tag"># 守护进程</a>
+            <a href="/tags/公众号/" rel="tag"># 公众号</a>
           
-            <a href="/tags/daemon/" rel="tag"># daemon</a>
+            <a href="/tags/服务号/" rel="tag"># 服务号</a>
           
         </div>
       
@@ -463,8 +490,8 @@ fork子进程，父进程退出(当前子进程会成为init进程的子进程)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/19/北京小客车摇号程序PHP版/" rel="next" title="北京小客车摇号程序PHP版">
-                <i class="fa fa-chevron-left"></i> 北京小客车摇号程序PHP版
+              <a href="/2017/06/29/本地调试微信之内网穿透/" rel="next" title="本地调试微信之内网穿透">
+                <i class="fa fa-chevron-left"></i> 本地调试微信之内网穿透
               </a>
             
           </div>
@@ -472,10 +499,6 @@ fork子进程，父进程退出(当前子进程会成为init进程的子进程)
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/06/28/利用redis实现多属性快速查询/" rel="prev" title="利用redis实现多属性快速查询">
-                利用redis实现多属性快速查询 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -501,8 +524,8 @@ fork子进程，父进程退出(当前子进程会成为init进程的子进程)
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/31/守护进程之PHP实现/"
-           data-title="守护进程之PHP实现" data-url="https://zhaojingxian.cn/2017/03/31/守护进程之PHP实现/">
+      <div class="ds-thread" data-thread-key="2018/03/20/微信公众号-服务号-开发注意事项/"
+           data-title="微信公众号(服务号)开发注意事项" data-url="https://zhaojingxian.cn/2018/03/20/微信公众号-服务号-开发注意事项/">
       </div>
     
   </div>
@@ -651,7 +674,7 @@ fork子进程，父进程退出(当前子进程会成为init进程的子进程)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是守护进程"><span class="nav-number">1.</span> <span class="nav-text">什么是守护进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何实现守护进程"><span class="nav-number">2.</span> <span class="nav-text">如何实现守护进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP实现"><span class="nav-number">3.</span> <span class="nav-text">PHP实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日常使用已经注意事项"><span class="nav-number">4.</span> <span class="nav-text">日常使用已经注意事项</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#万事开头难"><span class="nav-number">1.</span> <span class="nav-text">万事开头难</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些功能点的使用场景"><span class="nav-number">2.</span> <span class="nav-text">一些功能点的使用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#带参数的二维码"><span class="nav-number">2.1.</span> <span class="nav-text">带参数的二维码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#个性化菜单"><span class="nav-number">2.2.</span> <span class="nav-text">个性化菜单</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#客服消息"><span class="nav-number">2.3.</span> <span class="nav-text">客服消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JS-SDK"><span class="nav-number">2.4.</span> <span class="nav-text">JS-SDK</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遇到过的一些问题"><span class="nav-number">3.</span> <span class="nav-text">遇到过的一些问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不是总结的总结"><span class="nav-number">4.</span> <span class="nav-text">不是总结的总结</span></a></li></ol></div>
             
 
           </div>
