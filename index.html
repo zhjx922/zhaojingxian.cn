@@ -278,6 +278,177 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://zhaojingxian.cn/2018/08/07/配置TinyMCE“完美”支持小程序富文本组件/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="zhjx922">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/3774194?v=3&s=460">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="zhjx922 De Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="zhjx922 De Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/08/07/配置TinyMCE“完美”支持小程序富文本组件/" itemprop="url">
+                  配置TinyMCE“完美”支持小程序富文本组件
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-07T22:18:38+08:00">
+                2018-08-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/07/配置TinyMCE“完美”支持小程序富文本组件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/08/07/配置TinyMCE“完美”支持小程序富文本组件/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>最近给小程序新增了文章资讯内容，发现小程序并不能直接展示HTML代码，仅支持部分HTML节点及属性，只能被迫搞一个方便自己复制粘贴的CMS后台富文本编辑器</p>
+</blockquote>
+<h3 id="TinyMCE"><a href="#TinyMCE" class="headerlink" title="TinyMCE"></a>TinyMCE</h3><p>TinyMCE是一个轻量级的基于浏览器的所见即所得HTML富文本编辑器，支持目前流行的各种浏览器，由JavaScript写成。功能配置灵活简单（两行代码就可以将编辑器嵌入网页中），支持AJAX。</p>
+<p>因为之前项目使用过，所以直接照着搬了过来，具体怎么怎么加载js这些就不讲了，不会的自己谷歌百度~</p>
+<h3 id="rich-text"><a href="#rich-text" class="headerlink" title="rich-text"></a>rich-text</h3><p>rich-text是小程序的富文本组件，但是微信限制了一部分能力。<br>它的关键属性是nodes,注意一句话：<code>nodes 属性推荐使用 Array 类型，由于组件会将 String 类型转换为 Array 类型，因而性能会有所下降</code>，这篇文章暂时不考虑性能问题，只支持String，如果你想支持Array，自己想办法。。<br>rich-text支持节点看官方文档：<a href="https://developers.weixin.qq.com/miniprogram/dev/component/rich-text.html" target="_blank" rel="external">rich-text</a></p>
+<h3 id="TinyMCE配置"><a href="#TinyMCE配置" class="headerlink" title="TinyMCE配置"></a>TinyMCE配置</h3><p>TinyMCE的配置网上很多很多了这里就不讲了，只写一下小程序rich-text用到的，代码+注释</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">tinymce.init(&#123;</div><div class="line">    <span class="attr">selector</span>:<span class="string">'textarea#content'</span>,</div><div class="line">    <span class="attr">height</span>: <span class="number">400</span>,</div><div class="line">    <span class="attr">menubar</span>: <span class="literal">false</span>,</div><div class="line">    <span class="comment">//这些插件可以自由配置，并且可以自己定制，比如支持图片直接上传到第三方云储存</span></div><div class="line">    plugins: [</div><div class="line">        <span class="string">'paste,preview,fullscreen,searchreplace,code,wordcount'</span></div><div class="line">    ],</div><div class="line">    <span class="attr">toolbar1</span>: <span class="string">"fullscreen preview code"</span>,</div><div class="line">    <span class="attr">toolbar2</span>: <span class="string">"undo redo | searchreplace"</span>,</div><div class="line">    <span class="comment">//只有这里配置的节点和属性，编辑器才支持，不符合的会自动过滤(下面是目前rich-text支持的所有节点和属性)</span></div><div class="line">    valid_elements: <span class="string">"p[style|class],a[style|class],abbr[style|class],b[style|class],blockquote[style|class],br[style|class],code[style|class],col[style|class|span|width],colgroup[style|class|span|width],dd[style|class],del[style|class],div[style|class],dl[style|class],dt[style|class],em[style|class],fieldset[style|class],h1[style|class],h2[style|class],h3[style|class],h4[style|class],h5[style|class],h6[style|class],hr[style|class],i[style|class],img[style|class|alt|src|height|width],ins[style|class],label[style|class],legend[style|class],li[style|class],ol[style|class|start|type],p[style|class],q[style|class],span[style|class],strong[style|class],sub[style|class],sup[style|class],table[style|class|width],tbody[style|class],td[style|class|colspan|height|rowspan|width],tfoot[style|class],th[style|class|colspan|height|rowspan|width],thead[style|class],tr[style|class],ul[style|class]"</span>,</div><div class="line">    <span class="comment">//如果配置了这个，编辑器会自动抹掉节点的属性(如果要保留请设置为false)</span></div><div class="line">    paste_as_text: <span class="literal">true</span>,</div><div class="line">    <span class="attr">plugin_preview_height</span>: <span class="number">670</span>,</div><div class="line">    <span class="attr">plugin_preview_width</span>: <span class="number">370</span>,</div><div class="line">    <span class="comment">//一个汉字算一个字符，为了统计相对准确</span></div><div class="line">    wordcount_countregex: <span class="regexp">/([\w\u2019\x27\-\u00C0-\u1FFF]+)|([^\x00-\xff])/g</span>,</div><div class="line">    <span class="comment">//rich-text不支持html实体，所以我们得将实体转为字符</span></div><div class="line">    entities : <span class="string">'nbsp,160,iexcl,161,cent,162,pound,163,curren,164,yen,165,brvbar,166,sect,167,uml,168,copy,169,ordf,170,'</span></div><div class="line">     + <span class="string">'laquo,171,not,172,shy,173,reg,174,macr,175,deg,176,plusmn,177,sup2,178,sup3,179,acute,180,micro,181,para,182,'</span></div><div class="line">     + <span class="string">'middot,183,cedil,184,sup1,185,ordm,186,raquo,187,frac14,188,frac12,189,frac34,190,iquest,191,Agrave,192,Aacute,193,'</span></div><div class="line">     + <span class="string">'Acirc,194,Atilde,195,Auml,196,Aring,197,AElig,198,Ccedil,199,Egrave,200,Eacute,201,Ecirc,202,Euml,203,Igrave,204,'</span></div><div class="line">     + <span class="string">'Iacute,205,Icirc,206,Iuml,207,ETH,208,Ntilde,209,Ograve,210,Oacute,211,Ocirc,212,Otilde,213,Ouml,214,times,215,'</span></div><div class="line">     + <span class="string">'Oslash,216,Ugrave,217,Uacute,218,Ucirc,219,Uuml,220,Yacute,221,THORN,222,szlig,223,agrave,224,aacute,225,acirc,226,'</span></div><div class="line">     + <span class="string">'atilde,227,auml,228,aring,229,aelig,230,ccedil,231,egrave,232,eacute,233,ecirc,234,euml,235,igrave,236,iacute,237,'</span></div><div class="line">     + <span class="string">'icirc,238,iuml,239,eth,240,ntilde,241,ograve,242,oacute,243,ocirc,244,otilde,245,ouml,246,divide,247,oslash,248,'</span></div><div class="line">     + <span class="string">'ugrave,249,uacute,250,ucirc,251,uuml,252,yacute,253,thorn,254,yuml,255,fnof,402,Alpha,913,Beta,914,Gamma,915,Delta,916,'</span></div><div class="line">     + <span class="string">'Epsilon,917,Zeta,918,Eta,919,Theta,920,Iota,921,Kappa,922,Lambda,923,Mu,924,Nu,925,Xi,926,Omicron,927,Pi,928,Rho,929,'</span></div><div class="line">     + <span class="string">'Sigma,931,Tau,932,Upsilon,933,Phi,934,Chi,935,Psi,936,Omega,937,alpha,945,beta,946,gamma,947,delta,948,epsilon,949,'</span></div><div class="line">     + <span class="string">'zeta,950,eta,951,theta,952,iota,953,kappa,954,lambda,955,mu,956,nu,957,xi,958,omicron,959,pi,960,rho,961,sigmaf,962,'</span></div><div class="line">     + <span class="string">'sigma,963,tau,964,upsilon,965,phi,966,chi,967,psi,968,omega,969,thetasym,977,upsih,978,piv,982,bull,8226,hellip,8230,'</span></div><div class="line">     + <span class="string">'prime,8242,Prime,8243,oline,8254,frasl,8260,weierp,8472,image,8465,real,8476,trade,8482,alefsym,8501,larr,8592,uarr,8593,'</span></div><div class="line">     + <span class="string">'rarr,8594,darr,8595,harr,8596,crarr,8629,lArr,8656,uArr,8657,rArr,8658,dArr,8659,hArr,8660,forall,8704,part,8706,exist,8707,'</span></div><div class="line">     + <span class="string">'empty,8709,nabla,8711,isin,8712,notin,8713,ni,8715,prod,8719,sum,8721,minus,8722,lowast,8727,radic,8730,prop,8733,infin,8734,'</span></div><div class="line">     + <span class="string">'ang,8736,and,8743,or,8744,cap,8745,cup,8746,int,8747,there4,8756,sim,8764,cong,8773,asymp,8776,ne,8800,equiv,8801,le,8804,ge,8805,'</span></div><div class="line">     + <span class="string">'sub,8834,sup,8835,nsub,8836,sube,8838,supe,8839,oplus,8853,otimes,8855,perp,8869,sdot,8901,lceil,8968,rceil,8969,lfloor,8970,'</span></div><div class="line">     + <span class="string">'rfloor,8971,lang,9001,rang,9002,loz,9674,spades,9824,clubs,9827,hearts,9829,diams,9830,OElig,338,oelig,339,Scaron,352,scaron,353,'</span></div><div class="line">     + <span class="string">'Yuml,376,circ,710,tilde,732,ensp,8194,emsp,8195,thinsp,8201,zwnj,8204,zwj,8205,lrm,8206,rlm,8207,ndash,8211,mdash,8212,lsquo,8216,'</span></div><div class="line">     + <span class="string">'rsquo,8217,sbquo,8218,ldquo,8220,rdquo,8221,bdquo,8222,dagger,8224,Dagger,8225,permil,8240,lsaquo,8249,rsaquo,8250,euro,8364,'</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3><p>毕竟还没有长期大量使用，是不是完全没问题，不敢100%保证，如果有问题，大家随时给我反馈，啊哈哈~</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+  		<div>
+  		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  		<!-- test -->
+  		<ins class="adsbygoogle"
+  	    	style="display:block"
+  	     	data-ad-client="ca-pub-4751228138087748"
+  	     	data-ad-slot="5445374794"
+  	     	data-ad-format="auto"></ins>
+  		<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  		</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="https://zhaojingxian.cn/2018/07/11/如何自己实现session功能/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -405,6 +576,8 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Session类简单实现</div><div class="line"> * <span class="doctag">@author</span> zhjx922</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Session</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">//当前sessionId</span></div><div class="line">    <span class="keyword">private</span> $_sessionId;</div><div class="line">    <span class="comment">//session的储存路径</span></div><div class="line">    <span class="keyword">private</span> $_sessionPath = <span class="string">'/tmp/session'</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 初始化sessionId</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>($_COOKIE[<span class="string">'PHPSESSID'</span>]) &amp;&amp; <span class="keyword">$this</span>-&gt;checkSession($_COOKIE[<span class="string">'PHPSESSID'</span>])) &#123;</div><div class="line">            <span class="keyword">$this</span>-&gt;_sessionId = $_COOKIE[<span class="string">'PHPSESSID'</span>];</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">$this</span>-&gt;_sessionId = uniqid();</div><div class="line">            setcookie(<span class="string">"PHPSESSID"</span>, <span class="keyword">$this</span>-&gt;_sessionId);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 设置session</div><div class="line">     * <span class="doctag">@param</span> string $key</div><div class="line">     * <span class="doctag">@param</span> mixed $value</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setSession</span><span class="params">($key, $value)</span></span></div><div class="line">    &#123;</div><div class="line">        $sessionInfo = <span class="keyword">$this</span>-&gt;getSessionInfo();</div><div class="line">        $sessionInfo[$key] = $value;</div><div class="line">        $sessionFile =  <span class="string">"&#123;$this-&gt;_sessionPath&#125;/&#123;$this-&gt;_sessionId&#125;"</span>;</div><div class="line">        file_put_contents($sessionFile, serialize($sessionInfo));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取session</div><div class="line">     * <span class="doctag">@param</span> string $key</div><div class="line">     * <span class="doctag">@return</span> mixed</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getSession</span><span class="params">($key)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;getSessionInfo()[$key];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取当前sessionId下的内容</div><div class="line">     * <span class="doctag">@return</span> array</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">getSessionInfo</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(!is_dir(<span class="keyword">$this</span>-&gt;_sessionPath))</div><div class="line">        &#123;</div><div class="line">            mkdir(<span class="keyword">$this</span>-&gt;_sessionPath);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        $sessionFile =  <span class="string">"&#123;$this-&gt;_sessionPath&#125;/&#123;$this-&gt;_sessionId&#125;"</span>;</div><div class="line">        <span class="keyword">if</span>(is_file($sessionFile)) &#123;</div><div class="line">            $contents = file_get_contents($sessionFile);</div><div class="line">            <span class="keyword">return</span> unserialize($contents);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> [];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 检查session是否有效</div><div class="line">     * <span class="doctag">@param</span> string $sessionId</div><div class="line">     * <span class="doctag">@return</span> bool</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">checkSession</span><span class="params">($sessionId)</span></span></div><div class="line">    &#123;</div><div class="line">        $sessionFile =  <span class="string">"&#123;$this-&gt;_sessionPath&#125;/&#123;$sessionId&#125;"</span>;</div><div class="line">        <span class="keyword">if</span>(is_file($sessionFile)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>使用方法如下</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$session = <span class="keyword">new</span> Session();</div><div class="line">$session-&gt;setSession(<span class="string">'a'</span>, <span class="string">'b'</span>); <span class="comment">//第二次访问时注释掉这行，验证下一行$session-&gt;getSession('a')输出的内容是否正确</span></div><div class="line">var_dump($session-&gt;getSession(<span class="string">'a'</span>));</div></pre></td></tr></table></figure>
+<p>是不是特别简单呢？使用每个功能的时候多想一下它是怎么实现的，很多时候能够让我们快速定位到问题的所在~</p>
+
           
         
       
@@ -1918,179 +2091,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://zhaojingxian.cn/2017/02/19/加密算法之对称加密/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="zhjx922">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/3774194?v=3&s=460">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="zhjx922 De Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="zhjx922 De Blog" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/19/加密算法之对称加密/" itemprop="url">
-                  加密算法之对称加密
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-19T23:38:22+08:00">
-                2017-02-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/加密算法/" itemprop="url" rel="index">
-                    <span itemprop="name">加密算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/02/19/加密算法之对称加密/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/19/加密算法之对称加密/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>在互联网如此发达的年代，信息的安全也变得越来越重要，我们也使用了各式各样的加密手段来保护数据的安全，但是各种加密算法你真的了解它么？他们的原理又是什么呢？<br>常见的加密分为对称加密、非对称加密还有散列算法(严格来说，散列不算加密)，这篇文章我们来了解一下对称加密</p>
-</blockquote>
-<h3 id="传递甜甜蜜蜜小纸条"><a href="#传递甜甜蜜蜜小纸条" class="headerlink" title="传递甜甜蜜蜜小纸条"></a>传递甜甜蜜蜜小纸条</h3><p>穿越到初中的你，凭借着程序员”高贵”的气息成功的和一个小女生”勾搭”上了。<br>然而在那个不是谁都有手机的年代，上课的时候想和她传递信息，貌似只能写在纸上，然后借助同学之手，慢慢传递。最关键的是，万一某个同学好奇心太重偷偷看到你们的”甜甜蜜蜜”，你也许会不太爽吧？<br>作为一个从未来穿越回来的程序员，你立马在周末的时候买了两本班上谁都没有的大字典(康熙字典)，从此你俩的小纸条上出现的是如下的内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">123:5 564:3 11:8</div><div class="line"></div><div class="line">665:2 123:3 456:6 789:2...</div></pre></td></tr></table></figure>
-<p><strong><em>123(代表页码):5(代表行)</em></strong></p>
-<p>从此之后，妹子再也不理你了(查字典太TM麻烦！)。。。<br>当然藏头诗也可以看做一种加密手段，前提是：你会写诗。。。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/19/加密算法之对称加密/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-  		<div>
-  		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  		<!-- test -->
-  		<ins class="adsbygoogle"
-  	    	style="display:block"
-  	     	data-ad-client="ca-pub-4751228138087748"
-  	     	data-ad-slot="5445374794"
-  	     	data-ad-format="auto"></ins>
-  		<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  		</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2138,7 +2138,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2147,7 +2147,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2156,7 +2156,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

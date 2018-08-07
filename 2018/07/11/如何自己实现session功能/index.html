@@ -103,7 +103,7 @@ session的实现原理session本身的实现原理其实很简单，几句话就
 
 用户首次访问时生成唯一ID(其实就是PHP中的session_id)
 根据session_id作为唯一标示，生成session_id为名称">
-<meta property="og:updated_time" content="2018-07-11T14:09:57.177Z">
+<meta property="og:updated_time" content="2018-07-11T14:17:46.052Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何自己实现session功能">
 <meta name="twitter:description" content="session字如其意，它的存在就是为了保持会话状态。PHP中的$_SESSION让我们很方便的使用它，但是如果PHP本身不提供这个功能，我们该如何实现呢？且听我慢慢忽悠。
@@ -414,6 +414,8 @@ session的实现原理session本身的实现原理其实很简单，几句话就
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Session类简单实现</div><div class="line"> * <span class="doctag">@author</span> zhjx922</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Session</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">//当前sessionId</span></div><div class="line">    <span class="keyword">private</span> $_sessionId;</div><div class="line">    <span class="comment">//session的储存路径</span></div><div class="line">    <span class="keyword">private</span> $_sessionPath = <span class="string">'/tmp/session'</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 初始化sessionId</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>($_COOKIE[<span class="string">'PHPSESSID'</span>]) &amp;&amp; <span class="keyword">$this</span>-&gt;checkSession($_COOKIE[<span class="string">'PHPSESSID'</span>])) &#123;</div><div class="line">            <span class="keyword">$this</span>-&gt;_sessionId = $_COOKIE[<span class="string">'PHPSESSID'</span>];</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">$this</span>-&gt;_sessionId = uniqid();</div><div class="line">            setcookie(<span class="string">"PHPSESSID"</span>, <span class="keyword">$this</span>-&gt;_sessionId);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 设置session</div><div class="line">     * <span class="doctag">@param</span> string $key</div><div class="line">     * <span class="doctag">@param</span> mixed $value</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setSession</span><span class="params">($key, $value)</span></span></div><div class="line">    &#123;</div><div class="line">        $sessionInfo = <span class="keyword">$this</span>-&gt;getSessionInfo();</div><div class="line">        $sessionInfo[$key] = $value;</div><div class="line">        $sessionFile =  <span class="string">"&#123;$this-&gt;_sessionPath&#125;/&#123;$this-&gt;_sessionId&#125;"</span>;</div><div class="line">        file_put_contents($sessionFile, serialize($sessionInfo));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取session</div><div class="line">     * <span class="doctag">@param</span> string $key</div><div class="line">     * <span class="doctag">@return</span> mixed</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getSession</span><span class="params">($key)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;getSessionInfo()[$key];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取当前sessionId下的内容</div><div class="line">     * <span class="doctag">@return</span> array</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">getSessionInfo</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(!is_dir(<span class="keyword">$this</span>-&gt;_sessionPath))</div><div class="line">        &#123;</div><div class="line">            mkdir(<span class="keyword">$this</span>-&gt;_sessionPath);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        $sessionFile =  <span class="string">"&#123;$this-&gt;_sessionPath&#125;/&#123;$this-&gt;_sessionId&#125;"</span>;</div><div class="line">        <span class="keyword">if</span>(is_file($sessionFile)) &#123;</div><div class="line">            $contents = file_get_contents($sessionFile);</div><div class="line">            <span class="keyword">return</span> unserialize($contents);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> [];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 检查session是否有效</div><div class="line">     * <span class="doctag">@param</span> string $sessionId</div><div class="line">     * <span class="doctag">@return</span> bool</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">checkSession</span><span class="params">($sessionId)</span></span></div><div class="line">    &#123;</div><div class="line">        $sessionFile =  <span class="string">"&#123;$this-&gt;_sessionPath&#125;/&#123;$sessionId&#125;"</span>;</div><div class="line">        <span class="keyword">if</span>(is_file($sessionFile)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>使用方法如下</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$session = <span class="keyword">new</span> Session();</div><div class="line">$session-&gt;setSession(<span class="string">'a'</span>, <span class="string">'b'</span>); <span class="comment">//第二次访问时注释掉这行，验证下一行$session-&gt;getSession('a')输出的内容是否正确</span></div><div class="line">var_dump($session-&gt;getSession(<span class="string">'a'</span>));</div></pre></td></tr></table></figure>
+<p>是不是特别简单呢？使用每个功能的时候多想一下它是怎么实现的，很多时候能够让我们快速定位到问题的所在~</p>
+
       
     </div>
 
@@ -477,6 +479,10 @@ session的实现原理session本身的实现原理其实很简单，几句话就
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/07/配置TinyMCE“完美”支持小程序富文本组件/" rel="prev" title="配置TinyMCE“完美”支持小程序富文本组件">
+                配置TinyMCE“完美”支持小程序富文本组件 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -550,7 +556,7 @@ session的实现原理session本身的实现原理其实很简单，几句话就
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -559,7 +565,7 @@ session的实现原理session本身的实现原理其实很简单，几句话就
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -568,7 +574,7 @@ session的实现原理session本身的实现原理其实很简单，几句话就
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
